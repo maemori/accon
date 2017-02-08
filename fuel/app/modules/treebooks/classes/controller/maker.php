@@ -117,7 +117,7 @@ class Controller_Maker extends Controller_Physical_Crud
 			$view->model->permission->permission = \Input::post('permission');
 			$view->model->permission->description = $view->model->title;
 			// Areaの設定
-			$publishing_point = \Config::get('books.publishing_point');
+			$publishing_point = \Config::get('treebooks.publishing_point');
 			if (!empty($view->model->slug_id)) {
 				$slug = Slug::find($view->model->slug_id, array('select' => array('code')));
 				$view->model->permission->area = mb_strtolower($publishing_point.'/'.$slug->code);
