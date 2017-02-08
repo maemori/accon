@@ -18,7 +18,7 @@ if [ ! -e /develop/workspace/project/fuel/app/modules/accon ]; then
 	cp /develop/workspace/project/fuel/app/modules/accon/initial/data/database.sql /develop/data/
 	cp /develop/workspace/project/fuel/app/modules/accon/initial/data/tables.sql /develop/data/
 fi
-# download
+# menus
 if [ ! -e /develop/workspace/project/fuel/app/modules/menus ]; then
 	curl -k https://kurobuta.jp/download/get/13 > /develop/archive/menus.zip
 	unzip /develop/archive/menus.zip -d /develop/workspace/project/fuel/app/modules

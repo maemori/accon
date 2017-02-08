@@ -31,12 +31,11 @@ docker run -d \
  -p 80:80 \
  -p 443:443 \
  -p 3306:3306 \
- -p 9000:9000 \
- -p 2211:22 \
+ -p 9901:9001 \
  -t -i \
  -h dev-server-01 \
  --name dev-server-01 \
- accon/ubuntu-nginx-phpfpm-redis-mysql
+ accon/ubuntu-nginx-phpfpm-redis-mysql:2.00
 ```
  
 ## iOS:コンテナの起動（LNMPを起動せず、後で手動で起動）
@@ -48,8 +47,31 @@ docker run -d \
  -p 80:80 \
  -p 443:443 \
  -p 3306:3306 \
- -p 9000:9000 \
- -p 2211:22 \
+ -p 9101:9001 \
+ -t -i \
+ -h dev-server-01 \
+ --name dev-server-01 \
+ accon/ubuntu-nginx-phpfpm-redis-mysql:2.00 \
+ /bin/bash
+```
+
+docker build -t accon/ubuntu-nginx-phpfpm-redis-mysql:2.00 .
+
+docker run -d  -v ~/Develop/master/data-volume/data:/develop/data:rw  -v ~/Develop/master/data-volume/workspace:/develop/workspace:rw  -v ~/Develop/master/data-volume/www:/develop/www:rw  -p 80:80  -p 443:443  -p 3306:3306  -p 9101:9001  -t -i  -h dev-server-01  --name dev-server-01  accon/ubuntu-nginx-phpfpm-redis-mysql:2.00  /bin/bash
+
+docexec -it dev-server-01 bash
+docker stop dev-server-01
+docker rm dev-server-01
+
+```bash:
+docker run -d \
+ -v ~/Develop/master/data-volume/data:/develop/data:rw \
+ -v ~/Develop/master/data-volume/workspace:/develop/workspace:rw \
+ -v ~/Develop/master/data-volume/www:/develop/www:rw \
+ -p 80:80 \
+ -p 443:443 \
+ -p 3306:3306 \
+ -p 9001:9001 \
  -t -i \
  -h dev-server-01 \
  --name dev-server-01 \
@@ -60,6 +82,16 @@ docker run -d \
 ## コンテナのスタート
 ```bash:
 docker start dev-server-01
+```
+
+## コンテナのストップ
+```bash:
+docker stop dev-server-01
+```
+
+## コンテナの削除
+```bash:
+docker rm dev-server-01
 ```
 
 ## コンテナのコンソールに接続
@@ -78,8 +110,7 @@ docker attach dev-server-01
 
 ## ビルド
 ```bash:
-cd ~/develop/master/data-volume/workspace/kurobuta.jp/docker/accon/ubuntu-nginx-phpfpm-redis-mysql
-docker build -t accon/ubuntu-nginx-phpfpm-redis-mysql:1.03 .
+docker build -t accon/ubuntu-nginx-phpfpm-redis-mysql:2.00 .
 ```
 
 # レポジトリにプッシュ

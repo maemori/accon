@@ -19,7 +19,7 @@ MAINTAINER Maemori Fumihiro
 # インストール
 RUN mkdir -p /develop/archive
 ## FuelPHPの設置
-RUN curl -k http://fuelphp.com/files/download/34 > /develop/archive/fuelphp.zip
+RUN curl -k http://fuelphp.com/files/download/36 > /develop/archive/fuelphp.zip
 RUN unzip /develop/archive/fuelphp.zip -d /develop/archive/workspace
 RUN mv /develop/archive/workspace/fuelphp-1.7.3 /develop/archive/workspace/project
 
@@ -28,6 +28,13 @@ ADD module/fuelphp-accon /etc/service/fuelphp-accon
 RUN chmod +x /etc/service/fuelphp-accon
 # HTTPはHTTPSへリダイレクト
 ADD conf/default /etc/nginx/sites-available/default
+
+## 起動用ファイルの設置
+ADD module/run.sh /etc/service/run
+RUN chmod +x /etc/service/run
+
+# 起動
+CMD ["/etc/service/run"]
 
 # 起動
 CMD ["/etc/service/fuelphp-accon"]

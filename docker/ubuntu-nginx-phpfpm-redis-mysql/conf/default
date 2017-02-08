@@ -1,9 +1,9 @@
 server {
 
 	server_name _;
-	listen 9010;
+	listen 80;
 
-	root /var/www/accon;
+	root /develop/www;
 
 	access_log /var/log/nginx/localhost-access.log;
 	error_log /var/log/nginx/localhost-error.log;
@@ -22,7 +22,6 @@ server {
 	location / {
 		rewrite ^ /index.php$uri;
 	}
-
 
 	location ~ [^/]\.php(/|$) {
 		fastcgi_split_path_info ^(.+?\.php)(/.*)$;

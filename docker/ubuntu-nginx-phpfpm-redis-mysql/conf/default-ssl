@@ -22,18 +22,24 @@ server {
 	client_max_body_size 250m;
 
 	location / {
-		index index.php;
-		try_files $uri $uri/ /index.php$is_args$args;
+		rewrite ^ /index.php$uri;
 	}
 
-	location ~ \.php$ {
-		fastcgi_split_path_info ^(.+\.php)(/.+)$;
-		# With php5-fpm:
-		fastcgi_pass unix:/var/run/php5-fpm.sock;
+	location ~ [^/]\.php(/|$) {
+		fastcgi_split_path_info ^(.+?\.php)(/.*)$;
+
+		if (!-f $document_root$fastcgi_script_name) {
+			return 404;
+		}
+
+		fastcgi_pass unix:/run/php/php7.0-fpm.sock;
 		fastcgi_index index.php;
-		include fastcgi_params;
-		include fastcgi.conf;
-		fastcgi_param LARA_ENV local; # Environment variable for Laravel
+		fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+		fastcgi_param PATH_INFO $fastcgi_path_info;
+		fastcgi_param REQUEST_FILENAME $request_filename;
+		fastcgi_param modHeadersAvailable true; #Avoid sending the security headers twice
+		fastcgi_param front_controller_active true;
+
 		fastcgi_param HTTPS off;
 		fastcgi_intercept_errors on;
 		fastcgi_ignore_client_abort off;
@@ -41,11 +47,25 @@ server {
 		fastcgi_buffers 4 256k;
 		fastcgi_busy_buffers_size 256k;
 		fastcgi_temp_file_write_size 256k;
+
+		include fastcgi_params;
 	}
 
-	# Deny .htaccess file access
-		location ~ /\.ht {
-		deny all;
+	location ~* \.(?:css|js)$ {
+		try_files $uri /index.php$uri$is_args$args;
+		add_header Cache-Control "max-age=15778463";
+		add_header X-Content-Type-Options nosniff;
+		add_header X-Frame-Options "SAMEORIGIN";
+		add_header X-XSS-Protection "1; mode=block";
+		add_header X-Robots-Tag none;
+		add_header X-Download-Options noopen;
+		add_header X-Permitted-Cross-Domain-Policies none;
+		access_log off;
+	}
+
+	location ~* \.(?:svg|gif|png|html|ttf|woff|woff2|ico|jpg|jpeg)$ {
+		try_files $uri /index.php$uri$is_args$args;
+		access_log off;
 	}
 
 }
