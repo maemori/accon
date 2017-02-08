@@ -1,0 +1,26 @@
+Changes since the last stable version 1.0.3: 2015/10/02
+    - バグフィックス
+
+    Fixed bugs:
+    - 1.0.2の不具合修正
+
+ inor issues:
+    - https://redmine.kurobuta.jp/
+
+Changes since the last stable version 1.0.2: 2015/09/15
+    - バグフィックス
+
+    Fixed bugs:
+    - リモートデバッグ設定変更
+
+    Minor issues:
+    - https://redmine.kurobuta.jp/
+
+Changes since the last stable version 1.0.0: 2015/06/28
+    - 正式リリース
+
+    Fixed bugs:
+    -
+
+    Minor issues:
+    - https://redmine.kurobuta.jp/

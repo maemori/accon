@@ -1,0 +1,36 @@
+Changes since the last stable version 1.0.1: 2015/07/18
+    - フロントのSEO改善
+
+    Fixed bugs:
+    -
+
+    Minor issues:
+    - https://redmine.kurobuta.jp/
+
+Changes since the last stable version 1.0.0: 2015/06/29
+    - 正式リリース
+
+    Fixed bugs:
+    -
+
+    Minor issues:
+    - https://redmine.kurobuta.jp/
+
+Changes since the last stable version 0.5.0: 2015/06/23
+    - ACCONのクラス構造見直しによる修正
+
+    Fixed bugs:
+    -
+
+    Minor issues:
+    - https://redmine.kurobuta.jp/
+
+Changes since the last stable version 0.0.0: 2015/05/07
+    - 機能全般
+    - 公開テスト中
+
+    Fixed bugs:
+    - 複数のバグを内応している可能性あり
+
+    Minor issues:
+    - https://redmine.kurobuta.jp/

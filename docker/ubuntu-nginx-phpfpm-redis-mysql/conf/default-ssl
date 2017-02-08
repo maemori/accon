@@ -1,0 +1,51 @@
+server {
+	listen 443;
+
+	root /develop/www;
+
+	ssl on;
+	ssl_certificate /etc/nginx/certs/server.crt;
+	ssl_certificate_key /etc/nginx/certs/server.key;
+
+	access_log /var/log/nginx/localhost-access-ssl.log;
+	error_log /var/log/nginx/localhost-error-ssl.log;
+
+	charset utf-8;
+
+	fastcgi_connect_timeout 300s;
+	fastcgi_send_timeout 300s;
+	fastcgi_read_timeout 300s;
+	send_timeout 180;
+
+	error_page 404 /index.php;
+
+	client_max_body_size 250m;
+
+	location / {
+		index index.php;
+		try_files $uri $uri/ /index.php$is_args$args;
+	}
+
+	location ~ \.php$ {
+		fastcgi_split_path_info ^(.+\.php)(/.+)$;
+		# With php5-fpm:
+		fastcgi_pass unix:/var/run/php5-fpm.sock;
+		fastcgi_index index.php;
+		include fastcgi_params;
+		include fastcgi.conf;
+		fastcgi_param LARA_ENV local; # Environment variable for Laravel
+		fastcgi_param HTTPS off;
+		fastcgi_intercept_errors on;
+		fastcgi_ignore_client_abort off;
+		fastcgi_buffer_size 128k;
+		fastcgi_buffers 4 256k;
+		fastcgi_busy_buffers_size 256k;
+		fastcgi_temp_file_write_size 256k;
+	}
+
+	# Deny .htaccess file access
+		location ~ /\.ht {
+		deny all;
+	}
+
+}

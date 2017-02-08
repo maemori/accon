@@ -1,0 +1,254 @@
+/*!
+ * kurobuta.jp v0.0.2
+ *
+ */
+/* タグ */
+body {
+	font-family: 'Lucida Grande', 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', Meiryo, メイリオ, sans-serif !important;
+	-webkit-font-smoothing: subpixel-antialiased;
+	/*text-shadow: 4px 4px 4px #aaa;*/
+	margin: 0 0 40px 0;
+	padding-top: 70px;
+}
+
+/* 共通 */
+.margin4px {
+	margin-top: 4px;
+	margin-bottom: 2px;
+}
+
+/* ナビゲーション */
+.navbar-nav li a {
+	padding-top: 18px;
+}
+
+/* 内側ナビゲーション */
+.inner-nav {
+	margin-top: 4px;
+	margin-bottom: 4px;
+}
+
+/* list-group */
+.list-group {
+	margin-top: 4px;
+	margin-bottom: 12px;
+}
+
+/* パンくずリスト */
+.breadcrumb {
+	font-size: 16px;
+}
+
+/* ボタングループ */
+.btn-group {
+	display: flex;
+}
+
+/* ボタン */
+.btn {
+	margin-bottom: 3px;
+}
+
+.btn-clear {
+	margin-top: 2px;
+	margin-bottom: 2px;
+}
+
+/* 変更不可 */
+.disabled {
+	cursor: not-allowed;
+	background-color: #eee;
+	opacity: 1;
+}
+
+/* チェックボックス */
+input[type="checkbox"] {
+	margin: 0 0 0 0;
+}
+
+/* Bootstrap */
+.form-horizontal .form-group {
+	margin-right: 0;
+	margin-left: 0;
+}
+
+/* タブ */
+.tab-content {
+	border-left: 1px solid #DDD;
+	border-right: 1px solid #DDD;
+	border-bottom: 1px solid #DDD;
+	padding: 4px;
+}
+
+/* テーブル */
+th.nowrap, td.nowrap {
+	white-space: nowrap;
+}
+
+/* パジネーション */
+.pagination {
+	margin: 0 0 0 0;
+}
+
+/* 検索条件エリア */
+.search-condition-area {
+	padding: 15px 0 30px 0;
+}
+
+.search-condition-input-box {
+	padding-right: 0;
+	padding-left: 0;
+}
+
+.search-condition-input {
+	margin: 0 0 15px 0;
+}
+
+.search-condition-input-end {
+	margin: 0 0 22px 0;
+}
+
+.search-condition-btn {
+	top: -7px;
+}
+
+/* Table */
+table.dataTable thead .sorting {
+	background: url("../img/sort_both.png") no-repeat center right;
+}
+
+table.dataTable thead .sorting_asc {
+	background: url("../img/sort_asc.png") no-repeat center right;
+}
+
+table.dataTable thead .sorting_desc {
+	background: url("../img/sort_desc.png") no-repeat center right;
+}
+
+table.dataTable thead .sorting_asc_disabled {
+	background: url("../img/sort_asc_disabled.png") no-repeat center right;
+}
+
+table.dataTable thead .sorting_desc_disabled {
+	background: url("../img/sort_desc_disabled.png") no-repeat center right;
+}
+
+/* パネル */
+.panel-default .panel-heading,
+.panel-footer {
+	background-color: #fdfdfd;
+}
+
+/* 共通 */
+/*折り返す*/
+.break-word {
+	/*word-wrap: break-word;*/
+	word-break: break-all;
+}
+
+/* Google Map */
+.google_map_attach {
+	width: 200px;
+	height: 80px;
+}
+
+.google_map_attach_str {
+	color: #36aae9;
+}
+
+/* Location */
+.location {
+	height: 17px;
+	padding: 2px;
+}
+
+.location label {
+	padding: 5px 0 0 0;
+}
+
+.location div {
+	padding-bottom: 4px;
+}
+
+body {
+	background:white;
+	font:normal normal 13px/1.4 Segoe,"Segoe UI",Calibri,Helmet,FreeSans,Sans-Serif;
+}
+
+/* tree */
+.tree-panel-collapse {
+	margin-right: 2px;
+}
+
+.tree-panel-body {
+	overflow: auto;
+	padding-left: 0;
+}
+
+
+.tree,
+.tree ul {
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+
+.tree ul {
+	margin-left:1em; /* indentation */
+	position:relative;
+}
+
+.tree ul ul {margin-left:.5em} /* (indentation/2) */
+
+.tree ul:before {
+	content:"";
+	display:block;
+	width:0;
+	position:absolute;
+	top:0;
+	bottom:0;
+	left:0;
+	border-left:1px solid;
+}
+
+.tree li {
+	margin:0;
+	padding:0 1.5em; /* indentation + .5em */
+	line-height:2em; /* default list item's `line-height` */
+	color:#369;
+	font-weight:bold;
+	position:relative;
+	white-space:nowrap;
+}
+
+.tree ul li:before {
+	content:"";
+	display:block;
+	width:10px; /* same with indentation */
+	height:0;
+	border-top:1px solid;
+	margin-top:-1px; /* border top width */
+	position:absolute;
+	top:1em; /* (line-height/2) */
+	left:0;
+}
+
+.tree ul li:last-child:before {
+	background:white; /* same with body background */
+	height:auto;
+	top:1em; /* (line-height/2) */
+	bottom:0;
+}
+
+/* Tree books Module */
+.book-body {
+	padding-bottom: 25px;
+}
+
+.tree-menu-txt {
+	color: #8c8c8c;
+}
+
+.book-body img {
+	max-width: 100% !important;
+}

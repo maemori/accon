@@ -1,0 +1,35 @@
+Changes since the last stable version 1.0.3: 2015/10/02
+    - バグフィックス
+
+    Fixed bugs:
+    - ubuntu-nginx-phpfpm-redis-mysqlのアップデートに伴う更新
+
+    Minor issues:
+    - https://redmine.kurobuta.jp/
+
+Changes since the last stable version 1.0.2: 2015/09/15
+    - バグフィックス
+
+    Fixed bugs:
+    - ubuntu-nginx-phpfpm-redis-mysqlのアップデートに伴う更新
+
+    Minor issues:
+    - https://redmine.kurobuta.jp/
+
+Changes since the last stable version 1.0.1: 2015/07/18
+    - バグフィックス
+
+    Fixed bugs:
+    - docker/accon/fuelphp-accon/module/fuelphp-accon:起動シェル修正
+
+    Minor issues:
+    - https://redmine.kurobuta.jp/
+
+Changes since the last stable version 1.0.0: 2015/06/30
+    - 正式リリース
+
+    Fixed bugs:
+    -
+
+    Minor issues:
+    - https://redmine.kurobuta.jp/

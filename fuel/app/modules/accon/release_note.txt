@@ -1,0 +1,76 @@
+Changes since the last stable version 1.0.2: 2015/07/24
+    - 改善
+
+    Fixed bugs:
+    -
+
+    Minor issues:
+    - https://redmine.kurobuta.jp/issues/20 CRUDアクションの権限がない場合は、アクション非表示
+
+Changes since the last stable version 1.0.1: 2015/07/18
+    - バグフィックス
+
+    Fixed bugs:
+    - 内部の不適切な定義を是正（I/F、機能の変更はありません）
+    - app/modules/accon/views/foundation/view.phpの戻るボタンのカラーを修正
+
+    Minor issues:
+    - https://redmine.kurobuta.jp/
+
+Changes since the last stable version 1.0.0: 2015/06/29
+    - 正式リリース
+
+    Fixed bugs:
+    -
+
+    Minor issues:
+    - https://redmine.kurobuta.jp/
+
+Changes since the last stable version 0.5.0: 2015/06/23
+    - クラス構造FIX
+
+    Fixed bugs:
+    -
+
+    Minor issues:
+    - MVVM用のKinetic.Crudの実装
+    - https://redmine.kurobuta.jp/
+
+Changes since the last stable version 0.3.0: 2015/06/10
+    - クラス構造見直し
+
+    Fixed bugs:
+    -
+
+    Minor issues:
+    - https://redmine.kurobuta.jp/
+
+Changes since the last stable version 0.2.0: 2015/05/19
+    - 全般見直し（下位互換なし）
+
+    Fixed bugs:
+    -
+
+    Minor issues:
+    - https://redmine.kurobuta.jp/
+
+Changes since the last stable version 0.1.0: 2015/05/07
+    - Accon機能全般
+    - Nestedモデルサポート
+    - Ajaxサポート
+
+    Fixed bugs:
+    - 複数のバグを内応している可能性あり
+
+    Minor issues:
+    - https://redmine.kurobuta.jp/
+
+Changes since the last stable version 0.0.0: 2015/04/04
+    - Accon機能全般
+    - 公開テスト中
+
+    Fixed bugs:
+    - 複数のバグを内応している可能性あり
+
+    Minor issues:
+    - https://redmine.kurobuta.jp/
