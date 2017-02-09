@@ -1,133 +1,150 @@
-This software is released under the MIT License, see LICENSE.txt.
+# Short Description
+All-in-One PHP開発環境 （Ubuntu, Nginx, PHP, PHP-FPM, xdebug, Redis, MySQL）
 
-# 構成
- * Ubuntu 14.04.2 LTS (日本語対応)
- * Openssl 1.0.1f-1
- * Nginx 1.4.6
- * PHP 5.5.9
- * PHP-FPM 5.5.9
- * xdebug 2.2.3
- * Redis 2.2.4
- * MySQL 5.5.43
-# Ubuntu, Openssl, Nginx, PHP, PHP-FPM, xdebug, Redis, MySQL
+# Full Description
 
-## Data Volume ディレクトリの作成
-```bash:
-mkdir -p ~/Public/data-volume/data
-mkdir -p ~/Public/data-volume/workspace
-mkdir -p ~/Public/data-volume/www
+## 1. 概要
 
+PHP・Webアプリケーションに特化したローカル開発環境。  
+ローカルPCの開発用ディレクトリをDockerコンテナと共有し、そのUbuntu上で実行・開発・デバッグを行うための環境。
+
+## 2. 構成バージョン
+
+ * Ubuntu: 16.10 LTS (日本語対応)
+ * Nginx: 1.10
+ * PHP: 7.0
+ * MySQL: 5.7
+ * PHP-FPM: 7.0
+ * xdebug: 2.4
+ * Redis: 3.2
+
+## 3. 利用方法
+
+### 3.1. ローカルPCにDockerコンテナと共有するディレクトリを作成
+
+``` bash:
+mkdir -p ~/public/data-volume/workspace
+mkdir ~/public/data-volume/www
 ```
 
-* ~/Public/data-volume/dataディレクトリに「database.sql」「tables.sql」が存在しないと起動しません。
-[1.3.MySQLのデータベース作成用ファイル置き場](https://registry.hub.docker.com/u/accon/ubuntu-nginx-phpfpm-redis-mysql/)を参考にデータベースの準備を起動前に行ってください。
+ * data-volumeディレクトリ(配置場所はHOMEディレクトリ配下の任意の場所)  
+  Dockerコンテナの/developディレクトリにマウントされます。
 
-## iOS:コンテナの起動（バックグラウンドでLNMPを起動）
+ * data-volume/workspaceディレクトリ  
+  Webアプリケーションのプロジェクトを配置します。
+
+ * data-volume/wwwディレクトリ  
+  Webアプリケーションの公開ファイルを配置します。  
+
+### 3.2. Dockerコンテナの取得と起動
+
 ```bash:
 docker run -d \
- -v ~/Develop/master/data-volume/data:/develop/data:rw \
- -v ~/Develop/master/data-volume/workspace:/develop/workspace:rw \
- -v ~/Develop/master/data-volume/www:/develop/www:rw \
+ -v ~/public/data-volume:/develop:rw \
  -p 80:80 \
  -p 443:443 \
  -p 3306:3306 \
  -p 9901:9001 \
  -t -i \
- -h dev-server-01 \
- --name dev-server-01 \
- accon/ubuntu-nginx-phpfpm-redis-mysql:2.00
-```
- 
-## iOS:コンテナの起動（LNMPを起動せず、後で手動で起動）
-```bash:
-docker run -d \
- -v ~/Develop/master/data-volume/data:/develop/data:rw \
- -v ~/Develop/master/data-volume/workspace:/develop/workspace:rw \
- -v ~/Develop/master/data-volume/www:/develop/www:rw \
- -p 80:80 \
- -p 443:443 \
- -p 3306:3306 \
- -p 9101:9001 \
- -t -i \
- -h dev-server-01 \
- --name dev-server-01 \
- accon/ubuntu-nginx-phpfpm-redis-mysql:2.00 \
- /bin/bash
+ -h develop-server-01 \
+ --name develop-server-01 \
+ accon/ubuntu-nginx-phpfpm-redis-mysql
 ```
 
-docker build -t accon/ubuntu-nginx-phpfpm-redis-mysql:2.00 .
+### 3.4. 動作確認用ファイルの設置
 
-docker run -d  -v ~/Develop/master/data-volume/data:/develop/data:rw  -v ~/Develop/master/data-volume/workspace:/develop/workspace:rw  -v ~/Develop/master/data-volume/www:/develop/www:rw  -p 80:80  -p 443:443  -p 3306:3306  -p 9101:9001  -t -i  -h dev-server-01  --name dev-server-01  accon/ubuntu-nginx-phpfpm-redis-mysql:2.00  /bin/bash
+~/public/data-volume/wwwディレクリ配下にindex.phpファイルを配置。
 
-docexec -it dev-server-01 bash
-docker stop dev-server-01
-docker rm dev-server-01
+* index.phpの内容
 
+    ```php
+    <?php phpinfo();
+    ```
+
+#### 3.5. 動作確認
+
+下のURLにアクセスしPHPの情報が表示されればOK。
+
+* [http://127.0.0.1](http://127.0.0.1)
+* [https://127.0.0.1](https://127.0.0.1)
+
+## 4. よく使うDockerコンテナを制御するコマンド
+
+* コンテナのコンソールに接続
 ```bash:
-docker run -d \
- -v ~/Develop/master/data-volume/data:/develop/data:rw \
- -v ~/Develop/master/data-volume/workspace:/develop/workspace:rw \
- -v ~/Develop/master/data-volume/www:/develop/www:rw \
- -p 80:80 \
- -p 443:443 \
- -p 3306:3306 \
- -p 9001:9001 \
- -t -i \
- -h dev-server-01 \
- --name dev-server-01 \
- accon/ubuntu-nginx-phpfpm-redis-mysql \
- /bin/bash
+docker exec -it develop-server-01 bash
 ```
 
-## コンテナのスタート
+* コンテナのスタート
 ```bash:
-docker start dev-server-01
+docker start develop-server-01
 ```
 
-## コンテナのストップ
+* コンテナのストップ
 ```bash:
-docker stop dev-server-01
+docker stop develop-server-01
 ```
 
-## コンテナの削除
+* コンテナの削除
 ```bash:
-docker rm dev-server-01
-```
-
-## コンテナのコンソールに接続
-```bash:
-docker exec -it dev-server-01 bash
-#サービスの起動
-/etc/service/run
-```
-
-## コンテナのストップ
-```bash:
-docker attach dev-server-01
+docker rm develop-server-01
 ```
 
 -----
 
-## ビルド
-```bash:
-docker build -t accon/ubuntu-nginx-phpfpm-redis-mysql:2.00 .
-```
+# 開発者向け
 
-# レポジトリにプッシュ
+## レポジトリにプッシュ
+
 ```bash:
-docker push accon/ubuntu-nginx-phpfpm-redis-mysql:1.03
-# TAG付け
-docker tag imageId accon/ubuntu-nginx-phpfpm-redis-mysql:latest
+# push
+docker push accon/ubuntu-nginx-phpfpm-redis-mysql:1.10
+# Tag
+docker tag [imageId] accon/ubuntu-nginx-phpfpm-redis-mysql:latest
 docker push accon/ubuntu-nginx-phpfpm-redis-mysql:latest
 ```
 
-# 操作
+## Dockerコンテナ・イメージの操作
 
-## イメージ
- * 一覧    : docker images
- * 削除    : docker rmi [name]
+### ローカルPCにDockerコンテナと共有するディレクトリを作成
 
-## コンテナ
+``` bash:
+mkdir -p ~/Develop/master/accon/v2.0/data-volume/workspace
+mkdir ~/Develop/master/accon/v2.0/data-volume/www
+```
+
+### ビルド
+
+```bash:
+docker build -t accon/ubuntu-nginx-phpfpm-redis-mysql:1.10 .
+```
+
+### コンテナイメージの確認
+```
+docker images
+```
+
+### コンテナイメージの削除
+```
+docker rmi accon/ubuntu-nginx-phpfpm-redis-mysql:2.00
+```
+
+### コンテナの起動:
+
+```bash:
+docker run -d \
+ -v ~/Develop/master/accon/v2.0/data-volume:/develop:rw \
+ -p 80:80 \
+ -p 443:443 \
+ -p 3306:3306 \
+ -p 9901:9001 \
+ -t -i \
+ -h develop-server-01 \
+ --name develop-server-01 \
+ accon/ubuntu-nginx-phpfpm-redis-mysql:1.10
+```
+
+## コマンド
  * 一覧    : docker ps -a
  * 起動    : docker start [name]
  * 終了    : exit (コンソールで実行)
