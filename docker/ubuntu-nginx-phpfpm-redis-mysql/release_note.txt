@@ -1,3 +1,9 @@
+Changes since the last stable version 1.1.0: 2017/02/11
+    - 構成要素バージョンアップ（Ubuntu:16.10, Nginx:1.10, PHP:7.0, MySQL:5.7, PHP-FPM:7.0, xdebug:2.4, Redis: 3.2）
+
+    inor issues:
+       - https://redmine.kurobuta.jp/
+
 Changes since the last stable version 1.0.3: 2015/10/02
     - バグフィックス
 

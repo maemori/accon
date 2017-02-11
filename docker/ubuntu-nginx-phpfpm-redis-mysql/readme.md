@@ -3,6 +3,12 @@ All-in-One PHP開発環境 （Ubuntu, Nginx, PHP, PHP-FPM, xdebug, Redis, MySQL�
 
 # Full Description
 
+## ○[Dockerfileは、こちら(GitHub)](https://github.com/maemori/accon/blob/master/docker/ubuntu-nginx-phpfpm-redis-mysql/Dockerfile)
+
+## ○[Dockerfile一式は、こちらからダウンロード](https://kurobuta.jp/download/get/15)
+
+-----
+
 ## 1. 概要
 
 PHP・Webアプリケーションに特化したローカル開発環境。  
@@ -43,7 +49,7 @@ docker run -d \
  -v ~/public/data-volume:/develop:rw \
  -p 80:80 \
  -p 443:443 \
- -p 3306:3306 \
+ -p 3901:3306 \
  -p 9901:9001 \
  -t -i \
  -h develop-server-01 \
@@ -90,6 +96,15 @@ docker stop develop-server-01
 docker rm develop-server-01
 ```
 
+* 起動中コンテナの確認
+```bash:
+docker ps
+```
+* 全てのコンテナの確認
+```bash:
+docker ps -a
+```
+
 -----
 
 # 開発者向け
@@ -116,6 +131,7 @@ mkdir ~/Develop/master/accon/v2.0/data-volume/www
 ### ビルド
 
 ```bash:
+cd ~/Develop/master/accon/v2.0/data-volume/workspace/accon/docker/ubuntu-nginx-phpfpm-redis-mysql/
 docker build -t accon/ubuntu-nginx-phpfpm-redis-mysql:1.10 .
 ```
 
