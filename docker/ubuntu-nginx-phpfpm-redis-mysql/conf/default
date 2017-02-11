@@ -19,7 +19,7 @@ server {
 
 	client_max_body_size 250m;
 
-﻿	location = / {
+	location = / {
 		index index.php index.html;
 	}
 
