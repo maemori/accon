@@ -120,8 +120,12 @@ RUN openssl x509 -req -days 3650 -in /etc/nginx/certs/server.csr -signkey /etc/n
 
 # 起動用ファイルの設置
 
-ADD module/run.sh /etc/service/run
+ADD ./module/run.sh /etc/service/run
 RUN chmod +x /etc/service/run
+
+# データベース作成用スクリプトの設置
+
+ADD ./module/database.sql /tmp/database.sql
 
 # 起動
 
@@ -129,4 +133,4 @@ CMD ["/etc/service/run"]
 
 # 公開ポート
 
-EXPOSE 80 443 3306 9000
+EXPOSE 80 443 3306

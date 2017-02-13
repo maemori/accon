@@ -21,12 +21,8 @@ server {
 
 	client_max_body_size 250m;
 
-	location = / {
-		index index.php index.html;
-	}
-
 	location / {
-		rewrite ^ /index.php$uri;
+		index index.html index.php;
 	}
 
 	location ~ [^/]\.php(/|$) {

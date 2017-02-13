@@ -50,7 +50,6 @@ docker run -d \
  -p 80:80 \
  -p 443:443 \
  -p 3901:3306 \
- -p 9901:9001 \
  -t -i \
  -h develop-server-01 \
  --name develop-server-01 \
@@ -141,7 +140,7 @@ docker images
 ```
 
 ### コンテナイメージの削除
-```
+```s
 docker rmi accon/ubuntu-nginx-phpfpm-redis-mysql:2.00
 ```
 
@@ -153,7 +152,6 @@ docker run -d \
  -p 80:80 \
  -p 443:443 \
  -p 3306:3306 \
- -p 9901:9001 \
  -t -i \
  -h develop-server-01 \
  --name develop-server-01 \
