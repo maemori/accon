@@ -49,7 +49,7 @@ docker run -d \
  -v ~/public/data-volume:/develop:rw \
  -p 80:80 \
  -p 443:443 \
- -p 3901:3306 \
+ -p 3306:3306 \
  -t -i \
  -h develop-server-01 \
  --name develop-server-01 \
@@ -63,7 +63,7 @@ docker run -d \
 * index.phpの内容
 
     ```php
-    <?php phpinfo();
+    <?php phpinfo(); ?>
     ```
 
 #### 3.5. 動作確認
