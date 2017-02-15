@@ -15,8 +15,6 @@ server {
 	fastcgi_read_timeout 300s;
 	send_timeout 180;
 
-	error_page 404 /index.php;
-
 	client_max_body_size 250m;
 
 	location / {

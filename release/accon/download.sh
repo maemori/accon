@@ -1,6 +1,6 @@
 #!/bin/bash
-target=ubuntu-nginx-phpfpm-redis-mysql
-base_dir=~/Develop/master/accon/v2.0/data-volume/workspace/accon/docker
+target=download
+base_dir=~/Develop/master/accon/v2.0/data-volume/workspace/accon/fuel/app/modules
 release_dir=~/Develop/master/accon/release
 
 cd $release_dir
@@ -11,8 +11,8 @@ if [ ! -e $release_dir"/_backup" ]; then
 fi
 
 # 配布モジュール格納先作成
-if [ -e $release_dir"/ubuntu-nginx-phpfpm-redis-mysql" ]; then
-	rm -Rf $release_dir"/ubuntu-nginx-phpfpm-redis-mysql"
+if [ -e $release_dir"/"$target ]; then
+	rm -Rf $release_dir"/"$target
 fi
 
 # 前回作成モジュールをバックアップ

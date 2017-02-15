@@ -1,5 +1,7 @@
 server {
-	listen 443;
+
+	server_name _;
+	listen 80;
 
 	root /develop/www;
 
@@ -16,8 +18,6 @@ server {
 	fastcgi_send_timeout 300s;
 	fastcgi_read_timeout 300s;
 	send_timeout 180;
-
-	error_page 404 /index.php;
 
 	client_max_body_size 250m;
 
