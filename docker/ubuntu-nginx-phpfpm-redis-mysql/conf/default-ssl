@@ -1,7 +1,7 @@
 server {
 
 	server_name _;
-	listen 80;
+	listen 443;
 
 	root /develop/www;
 
@@ -23,6 +23,7 @@ server {
 
 	location / {
 		index index.html index.php;
+    try_files $uri $uri/ /index.php$is_args$args;
 	}
 
 	location ~ [^/]\.php(/|$) {

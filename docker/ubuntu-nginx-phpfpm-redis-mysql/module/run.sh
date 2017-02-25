@@ -19,4 +19,5 @@ local_ip_address=$(ip address | grep 'global eth0' | sed -e 's/.*inet[^6][^0-9]*
 echo "IP ADDRESS:"$local_ip_address
 echo "\n[Ctrl]+c : To the console"
 echo "[Ctrl]+p+q : To host OS"
+
 tail -f /dev/null

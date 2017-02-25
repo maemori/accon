@@ -20,7 +20,7 @@ Autoloader::add_classes(array(
 
 // 設定の読み込み
 \Config::load('accon::accon', 'accon');
-\Config::load('accon', 'accon');
+//\Config::load('accon', 'accon');
 
 // 定数の読み込み
 require APPPATH.'modules/accon/config/constant.php';

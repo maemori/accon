@@ -10,31 +10,28 @@
 # This software is released under the MIT License.
 # http://opensource.org/licenses/mit-license.php
 #
-# @version    1.03
+# @version    1.10
 # @author     Maemori Fumihiro
 # @link       https://kurobuta.jp
-FROM accon/ubuntu-nginx-phpfpm-redis-mysql:1.03
+FROM accon/ubuntu-nginx-phpfpm-redis-mysql:1.10
 MAINTAINER Maemori Fumihiro
 
 # インストール
 RUN mkdir -p /develop/archive
 ## FuelPHPの設置
-RUN curl -k http://fuelphp.com/files/download/36 > /develop/archive/fuelphp.zip
+RUN curl -k https://fuelphp.com/files/download/36 -o /develop/archive/fuelphp.zip
 RUN unzip /develop/archive/fuelphp.zip -d /develop/archive/workspace
-RUN mv /develop/archive/workspace/fuelphp-1.7.3 /develop/archive/workspace/project
+RUN mv /develop/archive/workspace/fuelphp-* /develop/archive/workspace/product
 
 # 設定
-ADD module/fuelphp-accon /etc/service/fuelphp-accon
-RUN chmod +x /etc/service/fuelphp-accon
-# HTTPはHTTPSへリダイレクト
-ADD conf/default /etc/nginx/sites-available/default
+## HTTPはHTTPSへリダイレクト
+ADD ./conf/default /etc/nginx/sites-available/default
 
 ## 起動用ファイルの設置
-ADD module/run.sh /etc/service/run
+ADD ./module/fuelphp-accon.sh /etc/service/fuelphp-accon
+RUN chmod +x /etc/service/fuelphp-accon
+ADD ./module/run.sh /etc/service/run
 RUN chmod +x /etc/service/run
-
-# 起動
-CMD ["/etc/service/run"]
 
 # 起動
 CMD ["/etc/service/fuelphp-accon"]

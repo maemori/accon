@@ -149,6 +149,7 @@ return array(
 		 */
 		'csrf_autoload'            => false,
 		'csrf_autoload_methods'    => array('post', 'put', 'delete'),
+		'output_filter' => array('Security::htmlentities'),
 
 		/**
 		 * If true, a HttpBadRequestException will be thrown. If false, a generic
@@ -419,10 +420,8 @@ return array(
 		'modules'  => array(
 			'accon',
 			'menus',
-//			'books',
 			'treebooks',
 			'download',
-			'sample',
 		),
 
 		/**

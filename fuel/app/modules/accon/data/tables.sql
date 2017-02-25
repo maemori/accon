@@ -39,7 +39,7 @@ CREATE TABLE `book_contents` (
   PRIMARY KEY (`id`),
   KEY `left_id` (`left_id`),
   KEY `right_id` (`right_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -143,7 +143,7 @@ CREATE TABLE `menus_contents` (
   PRIMARY KEY (`id`),
   KEY `left_id` (`left_id`),
   KEY `right_id` (`right_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -299,7 +299,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (0,'Guest','jaEVoZZRHGIIE+R+ZsP4JC4C1FIWW53a2FusDlu+8mg=',1,'guest@accon.jp','0','0','',1,1419896560,1428156574),(1,'Admin','jaEVoZZRHGIIE+R+ZsP4JC4C1FIWW53a2FusDlu+8mg=',7,'admin@accon.jp','1486270002','1433708234','a11778fc6f9ba344d3662fbc0ce29e272e4076db',1,1419896560,1486270002),(2,'Kurobuta','jaEVoZZRHGIIE+R+ZsP4JC4C1FIWW53a2FusDlu+8mg=',5,'kurobuta@accon.jp','1486533302','1486507801','6ea208da3b88fd5c4e6db41a8d3153ed155365af',2,1425712557,1486533302),(3,'Kuroneko','jaEVoZZRHGIIE+R+ZsP4JC4C1FIWW53a2FusDlu+8mg=',4,'kuroneko@accon.jp','0','0','',2,1425518782,1430946806),(4,'Inu','jaEVoZZRHGIIE+R+ZsP4JC4C1FIWW53a2FusDlu+8mg=',2,'inu@accon.jp','1437973199','1437690330','b403cd7f1791834f449062e512608f506420325c',4,1426545474,1437973199),(5,'Uma','jaEVoZZRHGIIE+R+ZsP4JC4C1FIWW53a2FusDlu+8mg=',3,'uma@accon.jp','0','0','',2,1425712557,1430946810),(6,'Ushi','jaEVoZZRHGIIE+R+ZsP4JC4C1FIWW53a2FusDlu+8mg=',0,'ushi@accon.jp','0','0','',2,1426545474,1430946815),(7,'Yagi','jaEVoZZRHGIIE+R+ZsP4JC4C1FIWW53a2FusDlu+8mg=',6,'yagi@accon.jp','0','0','',2,1426545474,1430946820),(8,'Accon','jaEVoZZRHGIIE+R+ZsP4JC4C1FIWW53a2FusDlu+8mg=',8,'accon@accon.jp','1486507743','1486271070','d57558f1b75aa15daff228f2e52ab85aac5dd1fe',8,1426545474,1486507743),(9,'Maemori','jaEVoZZRHGIIE+R+ZsP4JC4C1FIWW53a2FusDlu+8mg=',5,'maemori@kurobuta.jp','1438125979','1437972908','fc391b53e81aa0770bf9b56fad1995ccea130e0c',9,1435475186,1438125979),(10,'test3','AYhFHICWaxq/zttb5t8oe/cdZhVb6c42Ldaa/ncKqeo=',7,'test@test.co.jp','0','0','0',2,1486510735,1486510748);
+INSERT INTO `users` VALUES (0,'Guest','jaEVoZZRHGIIE+R+ZsP4JC4C1FIWW53a2FusDlu+8mg=',1,'guest@accon.jp','0','0','',1,1419896560,1428156574),(1,'Admin','jaEVoZZRHGIIE+R+ZsP4JC4C1FIWW53a2FusDlu+8mg=',7,'admin@accon.jp','1486270002','1433708234','a11778fc6f9ba344d3662fbc0ce29e272e4076db',1,1419896560,1486270002),(2,'Kurobuta','jaEVoZZRHGIIE+R+ZsP4JC4C1FIWW53a2FusDlu+8mg=',5,'kurobuta@accon.jp','1486775179','1486533302','5546f63d9b24c86b823e0b8552869a4c44e26fc3',2,1425712557,1486775179),(3,'Kuroneko','jaEVoZZRHGIIE+R+ZsP4JC4C1FIWW53a2FusDlu+8mg=',4,'kuroneko@accon.jp','0','0','',2,1425518782,1430946806),(4,'Inu','jaEVoZZRHGIIE+R+ZsP4JC4C1FIWW53a2FusDlu+8mg=',2,'inu@accon.jp','1437973199','1437690330','b403cd7f1791834f449062e512608f506420325c',4,1426545474,1437973199),(5,'Uma','jaEVoZZRHGIIE+R+ZsP4JC4C1FIWW53a2FusDlu+8mg=',3,'uma@accon.jp','0','0','',2,1425712557,1430946810),(6,'Ushi','jaEVoZZRHGIIE+R+ZsP4JC4C1FIWW53a2FusDlu+8mg=',0,'ushi@accon.jp','0','0','',2,1426545474,1430946815),(7,'Yagi','jaEVoZZRHGIIE+R+ZsP4JC4C1FIWW53a2FusDlu+8mg=',6,'yagi@accon.jp','0','0','',2,1426545474,1430946820),(8,'Accon','jaEVoZZRHGIIE+R+ZsP4JC4C1FIWW53a2FusDlu+8mg=',8,'accon@accon.jp','1486507743','1486271070','d57558f1b75aa15daff228f2e52ab85aac5dd1fe',8,1426545474,1486507743),(9,'Maemori','jaEVoZZRHGIIE+R+ZsP4JC4C1FIWW53a2FusDlu+8mg=',5,'maemori@kurobuta.jp','1438125979','1437972908','fc391b53e81aa0770bf9b56fad1995ccea130e0c',9,1435475186,1438125979),(10,'test3','AYhFHICWaxq/zttb5t8oe/cdZhVb6c42Ldaa/ncKqeo=',7,'test@test.co.jp','0','0','0',2,1486510735,1486510748);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -464,7 +464,7 @@ CREATE TABLE `users_permissions` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `permission` (`area`,`permission`),
   UNIQUE KEY `UNIQUE` (`area`,`permission`)
-) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -524,7 +524,7 @@ CREATE TABLE `users_role_permissions` (
   `actions` text,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNIQUE` (`role_id`,`perms_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -716,4 +716,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-02-09  7:27:48
+-- Dump completed on 2017-02-24  7:34:41

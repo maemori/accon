@@ -45,7 +45,7 @@ RUN DEBIAN_FRONTEND="noninteractive" apt-get install -q -y mysql-server
 RUN DEBIAN_FRONTEND="noninteractive" apt-get install -y mysql-client
 
 ## PHP
-RUN DEBIAN_FRONTEND="noninteractive" apt-get install -y php php-cli php-pear php-fpm php-mysql php-curl php-gd php-mcrypt php-intl php-imap php-tidy php-imagick php-mcrypt php-xdebug php-redis
+RUN DEBIAN_FRONTEND="noninteractive" apt-get install -y php php-cli php-pear php-fpm php-mysql php-curl php-gd php-mcrypt php-intl php-imap php-tidy php-imagick php-mcrypt php-xdebug php-redis php-mbstring
 
 ## Nginx
 RUN DEBIAN_FRONTEND="noninteractive" apt-get install -y nginx
