@@ -64,7 +64,7 @@ docker run -d \
 ### 2.4. MySQLの接続方法
 
 ```bash:
-mysql -u service_admin -p --host 127.0.0.1 --port 3306 service_db
+mysql -u service_admin -pServiceAdmin@P2W0rd --host 127.0.0.1 --port 3306 service_db
 ```
 
 * データベース: service_db
