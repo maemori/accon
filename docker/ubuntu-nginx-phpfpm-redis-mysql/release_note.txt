@@ -1,4 +1,4 @@
-Changes since the last stable version 1.1.0: 2017/02/11
+Changes since the last stable version 1.10: 2017/02/26
     - 構成要素バージョンアップ（Ubuntu:16.10, Nginx:1.10, PHP:7.0, MySQL:5.7, PHP-FPM:7.0, xdebug:2.4, Redis: 3.2）
 
     inor issues:

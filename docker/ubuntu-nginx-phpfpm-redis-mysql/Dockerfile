@@ -94,6 +94,7 @@ ADD ./conf/fastcgi.conf /etc/nginx/fastcgi.conf
 RUN ln -s /etc/nginx/sites-available/default-ssl /etc/nginx/sites-enabled/
 
 ## MySQL
+RUN sed -i -e "s/^bind-address\s*=\s*\(.*\)/bind-address = 0.0.0.0/g" /etc/mysql/mysql.conf.d/mysqld.cnf
 RUN mkdir /home/mysql
 RUN chown mysql /home/mysql/
 RUN usermod -d /home/mysql/ mysql

@@ -14,6 +14,8 @@ https://ja.wordpress.org/
 docker run -d -v ~/wordpress:/develop/www:rw -p 80:80 -t -i -h wordpress-server-01 --name wordpress-server-01 accon/ubuntu-nginx-phpfpm-redis-mysql
 ```
 
+※ Wordpressの設置後に「docker run」を実行してください
+
 ## 5.　Wordpressのインストール
 
 ### 5.1. 「[http://127.0.0.1](http://127.0.0.1)」にアクセス
@@ -22,9 +24,9 @@ docker run -d -v ~/wordpress:/develop/www:rw -p 80:80 -t -i -h wordpress-server-
 
 ### 5.3. 「データベース接続」のための詳細を入力
 
-* データベース名: common
-* ユーザー名: develop
-* パスワード: develop
+* データベース名: development
+* ユーザー名: Develop
+* パスワード: Temporary_Password
 * データベースのホスト名: 127.0.0.1
 * テーブル接頭辞: wp_
 
@@ -34,10 +36,10 @@ docker run -d -v ~/wordpress:/develop/www:rw -p 80:80 -t -i -h wordpress-server-
 
 * サイトのタイトル: Wordpressカスタマイズ環境構築のデモ ・・・任意
 * ユーザー名: wordpress_admin ・・・任意
-* パスワード: develop_demo@Install#2017! ・・・任意
-* メールアドレス:develop@example.jp ・・・任意
+* パスワード: Develop_$Temporary^Password ・・・任意
+* メールアドレス: develop@example.jp ・・・任意
 
-「Wordpressのインストール」ボタンを押す
+「Wordpressのインストール」ボタンを押す  
 ※画面が切り替わらない場合、ブラウザの再読込を行ってください
 
 ## 6. 動作確認

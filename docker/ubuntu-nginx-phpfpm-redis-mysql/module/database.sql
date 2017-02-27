@@ -1,2 +1,3 @@
-create database common;
-grant all privileges on common.* to develop@127.0.0.1 identified by 'develop';
+create database development;
+grant all on development.* to Develop@localhost identified by 'Temporary_Password';
+grant all privileges on development.* to Develop@"172.%.%.%" identified by 'Temporary_Password' with grant option;

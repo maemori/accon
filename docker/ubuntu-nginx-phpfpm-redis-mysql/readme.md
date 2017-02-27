@@ -3,16 +3,15 @@ All-in-One PHP開発環境 （Ubuntu, Nginx, PHP, PHP-FPM, xdebug, Redis, MySQL�
 
 # Full Description
 
-## ○[Dockerfileは、こちら(GitHub)](https://github.com/maemori/accon/blob/master/docker/ubuntu-nginx-phpfpm-redis-mysql/Dockerfile)
+## ● [Dockerfileは、こちら(GitHub)](https://github.com/maemori/accon/blob/master/docker/ubuntu-nginx-phpfpm-redis-mysql/Dockerfile)
 
-## ○[Dockerfile一式は、こちらからダウンロード](https://kurobuta.jp/download/get/15)
+## ● [Dockerfile一式は、こちらからダウンロード](https://kurobuta.jp/download/get/15)
 
 -----
-# 1. 「ubuntu-nginx-phpfpm-redis-mysql」について
 
 ## 1. 概要
 
-PHP・Webアプリケーションに特化したローカル開発環境。  
+PHPのWebアプリケーションに特化したローカル開発環境。  
 ローカルPCの開発用ディレクトリをDockerコンテナと共有し、そのUbuntu上で実行・開発・デバッグを行うための環境。
 
 ## 2. 構成バージョン
@@ -46,22 +45,23 @@ mkdir ~/development/www
 
 ### 3.2. Dockerコンテナの取得と起動
 
-#### 3.2.2. iOSの場合
 ```bash:
 docker run -d \
  -v ~/development:/develop:rw \
- -p 80:80 \
- -p 443:443 \
- -p 3306:3306 \
+ -p 80:80 -p 443:443 -p 3306:3306 \
  -t -i \
  -h develop-server-01 \
  --name develop-server-01 \
  accon/ubuntu-nginx-phpfpm-redis-mysql
 ```
 
-### 3.4. 動作確認用ファイルの設置
+### 3.3. 動作確認用ファイルの設置
 
 ~/public/data-volume/wwwディレクリ配下にindex.phpファイルを配置。
+
+```
+echo "<?php phpinfo(); ?>" >  ~/development/www/index.php
+```
 
 * index.phpの内容
 
@@ -69,19 +69,29 @@ docker run -d \
     <?php phpinfo(); ?>
     ```
 
-#### 3.5. 動作確認
+#### 3.4. 動作確認
 
 下のURLにアクセスしPHPの情報が表示されればOK。
 
 * [http://127.0.0.1](http://127.0.0.1)
 * [https://127.0.0.1](https://127.0.0.1)
 
+#### 3.5. MySQLの接続
+
+```bash:
+mysql -uDevelop -pTemporary_Password --host 127.0.0.1 --port 3306 development
+```
+
+* データベース: development
+* ユーザ: Develop
+* パスワード: Temporary_Password
 
 #### 3.6. デバッグ
 
-xDebug用にPCのIPエイリアスを割り当てる
+xDebug用にPCのIPアドレスのエイリアスを割り当てる
 
 * Macの場合
+
 ```
 sudo ifconfig lo0 alias 10.254.254.254
 ```
@@ -91,72 +101,82 @@ sudo ifconfig lo0 alias 10.254.254.254
 ## 4. よく使うDockerコンテナを制御するコマンド
 
 * コンテナのコンソールに接続
+
 ```bash:
 docker exec -it develop-server-01 bash
 ```
 
 * コンテナのスタート
+
 ```bash:
 docker start develop-server-01
 ```
 
 * コンテナのストップ
+
 ```bash:
 docker stop develop-server-01
 ```
 
 * コンテナの削除
+
 ```bash:
 docker rm develop-server-01
 ```
 
 * 起動中コンテナの確認
+
 ```bash:
 docker ps
 ```
+
 * 全てのコンテナの確認
+
 ```bash:
 docker ps -a
 ```
 
------
-# 2. [「ubuntu-nginx-phpfpm-redis-mysql」の利用方法（超高速ワードプレス開発環境構築）](exsample.md)
+* コンテナイメージの一覧
+
+```bash:
+docker images
+```
 
 -----
 
-# X.開発者向け
+## 5. 利用例
 
-## X.1. Dockerコンテナ・イメージの操作
+### 5.1. [「ubuntu-nginx-phpfpm-redis-mysql」の利用方法（超高速ワードプレス開発環境構築）](https://github.com/maemori/accon/blob/master/docker/ubuntu-nginx-phpfpm-redis-mysql/exsample.md)
 
-### X.1.1. ビルド
+-----
+
+## X. コンテナ開発者向け
+
+### X.1. Dockerコンテナイメージの管理
+
+#### X.1.1. ビルド
 
 ```bash:
 cd ~/Develop/master/accon/v2.0/data-volume/workspace/accon/docker/ubuntu-nginx-phpfpm-redis-mysql/
 docker build -t accon/ubuntu-nginx-phpfpm-redis-mysql:1.10 .
 ```
 
-### X.1.2. コンテナイメージの確認
-```
-docker images
-```
-
-### X.1.3. コンテナイメージの削除
-```
-docker rmi accon/ubuntu-nginx-phpfpm-redis-mysql:1.10
-```
-
-## X.1.4. レポジトリにプッシュ
+#### X.1.2. レポジトリにプッシュ
 
 ```bash:
 # push
 docker push accon/ubuntu-nginx-phpfpm-redis-mysql:1.10
 # Tag
-docker tag [imageId] accon/ubuntu-nginx-phpfpm-redis-mysql:latest
+docker tag accon/ubuntu-nginx-phpfpm-redis-mysql:1.10 accon/ubuntu-nginx-phpfpm-redis-mysql:latest
 docker push accon/ubuntu-nginx-phpfpm-redis-mysql:latest
+# None images delete
+docker images | awk '/<none/{print $3}' | xargs docker rmi
+docker images
 ```
-## X.2. その他のコマンド
 
- * 一覧    : docker ps -a
- * デタッチ : Ctrl+P Ctrl+Q (コンソールで実行)
- * アタッチ : docker attach [name]
- * 全て削除 : docker rm `docker ps -a -q`
+#### X.1.3. コンテナイメージの削除
+
+```
+docker rmi accon/ubuntu-nginx-phpfpm-redis-mysql:latest
+docker rmi accon/ubuntu-nginx-phpfpm-redis-mysql:1.10
+```
