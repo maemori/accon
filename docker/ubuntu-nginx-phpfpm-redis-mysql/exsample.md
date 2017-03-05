@@ -1,4 +1,10 @@
-# 【超高速XXX秒】WindowsにLinuxを立ててWordpressを実行・カスタマイズ・デバック
+# 【超高速:3分】WindowsにLinuxを立ててWordpressを実行・カスタマイズ・デバック
+
+## ● [Dockerfileは、こちら(GitHub)](https://github.com/maemori/accon/blob/master/docker/ubuntu-nginx-phpfpm-redis-mysql/Dockerfile)
+
+## ● [Dockerfile一式は、こちらからダウンロード](https://kurobuta.jp/download/get/15)
+
+-----
 
 ## 1. Dcokerのインストール
 https://www.docker.com/products/docker
