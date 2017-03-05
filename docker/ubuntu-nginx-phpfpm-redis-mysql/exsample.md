@@ -1,7 +1,7 @@
 # 【超高速XXX秒】WindowsにLinuxを立ててWordpressを実行・カスタマイズ・デバック
 
 ## 1. Dcokerのインストール
-https://www.docker.com/products/docker#/windows
+https://www.docker.com/products/docker
 
 ## 2. Wordpressの取得とファイルの展開
 https://ja.wordpress.org/
@@ -10,13 +10,32 @@ https://ja.wordpress.org/
 
 ## 4. Dockerコンテナの取得と起動
 
-```bash:
-docker run -d -v ~/wordpress:/develop/www:rw -p 80:80 -t -i -h wordpress-server-01 --name wordpress-server-01 accon/ubuntu-nginx-phpfpm-redis-mysql
+### 4.1 Windows用
+```bash: Windows
+docker run -d `
+ -v $home/wordpress:/develop/www:rw `
+ -p 80:80 `
+ -t -i `
+ -h wordpress-server-01 `
+ --name wordpress-server-01 `
+ accon/ubuntu-nginx-phpfpm-redis-mysql
 ```
+
+### 4.2 Mac用
+```bash: Windows
+docker run -d `
+ -v $home/wordpress:/develop/www:rw `
+ -p 80:80 `
+ -t -i `
+ -h wordpress-server-01 `
+ --name wordpress-server-01 `
+ accon/ubuntu-nginx-phpfpm-redis-mysql
+```
+
 
 ※ Wordpressの設置後に「docker run」を実行してください
 
-## 5.　Wordpressのインストール
+## 5. Wordpressのインストール
 
 ### 5.1. 「[http://127.0.0.1](http://127.0.0.1)」にアクセス
 
