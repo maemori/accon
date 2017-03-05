@@ -23,10 +23,6 @@ RUN curl -k https://fuelphp.com/files/download/36 -o /develop/archive/fuelphp.zi
 RUN unzip /develop/archive/fuelphp.zip -d /develop/archive/workspace
 RUN mv /develop/archive/workspace/fuelphp-* /develop/archive/workspace/product
 
-# 設定
-## HTTPはHTTPSへリダイレクト
-ADD ./conf/default /etc/nginx/sites-available/default
-
 ## 起動用ファイルの設置
 ADD ./module/fuelphp-accon.sh /etc/service/fuelphp-accon
 RUN chmod +x /etc/service/fuelphp-accon

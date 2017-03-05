@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
 
+# 基礎ディレクトリの作成
+if [ ! -e /develop/workspace ]; then
+	mkdir -p /develop/workspace
+fi
+if [ ! -e /develop/www ]; then
+	mkdir -p /develop/www
+fi
+
 # FuelPHPの配置
 if [ ! -e /develop/workspace/product ]; then
 	cp -a /develop/archive/workspace/product /develop/workspace/
@@ -14,16 +22,16 @@ if [ ! -e /develop/workspace/product/fuel/app/modules/accon ]; then
 	curl -k https://kurobuta.jp/download/get/16 > /develop/archive/sample.zip
 	unzip -o /develop/archive/sample.zip -d /develop/workspace/product/
 	## Sampleファイルセットをappディレクトリに設置
-  mv -f /develop/workspace/product/sample/app/bootstrap.php /develop/workspace/product/fuel/app/
-  ## classes設置
+	mv -f /develop/workspace/product/sample/app/bootstrap.php /develop/workspace/product/fuel/app/
+	## classes設置
 	rm -Rf /develop/workspace/product/fuel/app/classes
-  mv /develop/workspace/product/sample/app/classes /develop/workspace/product/fuel/app/
-  ## config設置
+	mv /develop/workspace/product/sample/app/classes /develop/workspace/product/fuel/app/
+	## config設置
 	rm -Rf /develop/workspace/product/fuel/app/config
-  mv /develop/workspace/product/sample/app/config /develop/workspace/product/fuel/app/
-  ## views設置
-  rm -Rf /develop/workspace/product/fuel/app/views
-  mv /develop/workspace/product/sample/app/views /develop/workspace/product/fuel/app/
+	mv /develop/workspace/product/sample/app/config /develop/workspace/product/fuel/app/
+	## views設置
+	rm -Rf /develop/workspace/product/fuel/app/views
+	mv /develop/workspace/product/sample/app/views /develop/workspace/product/fuel/app/
 	## Sampleファイルセットをpublicディレクトリに設置
 	rm -Rf /develop/workspace/product/public/assets
 	mv /develop/workspace/product/sample/public/assets /develop/workspace/product/public/
@@ -33,10 +41,10 @@ fi
 
 # Database構築用ファイルの設置
 if [ ! -e /develop/workspace/product/data ]; then
-  ## Databaseの作成
-  cp /develop/workspace/product/fuel/app/modules/accon/data/database.sql /tmp/
-  ## 初期データの投入
-  cp /develop/workspace/product/fuel/app/modules/accon/data/tables.sql /tmp/
+	## Databaseの作成
+	cp /develop/workspace/product/fuel/app/modules/accon/data/database.sql /tmp/
+	## 初期データの投入
+	cp /develop/workspace/product/fuel/app/modules/accon/data/tables.sql /tmp/
 fi
 
 # Menusモジュールのの設置
