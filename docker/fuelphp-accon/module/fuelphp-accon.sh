@@ -4,8 +4,8 @@
 if [ ! -e /develop/workspace ]; then
 	mkdir -p /develop/workspace
 fi
-if [ ! -e /develop/www ]; then
-	mkdir -p /develop/www
+if [ ! -e /develop/archive ]; then
+	mkdir -p /develop/archive
 fi
 
 # FuelPHPの配置
@@ -33,8 +33,8 @@ if [ ! -e /develop/workspace/product/fuel/app/modules/accon ]; then
 	rm -Rf /develop/workspace/product/fuel/app/views
 	mv /develop/workspace/product/sample/app/views /develop/workspace/product/fuel/app/
 	## Sampleファイルセットをpublicディレクトリに設置
-	rm -Rf /develop/workspace/product/public/assets
-	mv /develop/workspace/product/sample/public/assets /develop/workspace/product/public/
+	rm -Rf /develop/workspace/product/public
+	mv /develop/workspace/product/sample/public /develop/workspace/product/
 	# Sampleファイルセットの削除
 	rm -Rf /develop/workspace/product/sample
 fi
@@ -67,8 +67,13 @@ fi
 
 # wwwの設置
 if [ ! -e /develop/www/index.php ]; then
-	ln -s /develop/workspace/product/public/* /develop/www/
-	ln -s /develop/workspace/product/public/.htaccess /develop/www/
+	rm -Rf /develop/www
+	ln -s /develop/workspace/product/public /develop/www
+fi
+
+# 一時ディレクトリの削除
+if [ -e /develop/archive ]; then
+	rm -Rf /develop/archive
 fi
 
 echo -e "\nACCON Installation completion\n"
