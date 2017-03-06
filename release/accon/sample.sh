@@ -32,7 +32,7 @@ mkdir -p $release_dir"/"$target"/app/views"
 cp -Ra $base_dir"/fuel/app/views" $release_dir"/"$target/app/
 ## public
 mkdir -p $release_dir"/"$target"/public"
-cp -Ra $base_dir"/public" $release_dir"/"$target/public/
+cp -Ra $base_dir"/public" $release_dir"/"$target/
 ## bootstrap.php
 cp -a $base_dir"/fuel/app/bootstrap.php" $release_dir"/"$target"/app/"
 
