@@ -131,8 +131,15 @@ docker images
 
 #### X.1.1. ビルド
 
+Windows
 ```bash:
 cd  /git/accon/docker/taiga
+docker build -t accon/taiga:1.00 .
+```
+
+OS X
+```bash:
+cd ~/Develop/master/accon/v2.0/data-volume/workspace/accon/docker/taiga
 docker build -t accon/taiga:1.00 .
 ```
 

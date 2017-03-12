@@ -57,7 +57,7 @@ RUN \
   ADD ./conf/local.py /develop/workspace/taiga-back/settings/local.py
 
 # Timezone check none
-RUN
+RUN \
   sed -i "s/if offset != 0:/# if offset != 0:/" /usr/local/lib/python3.5/dist-packages/django/db/backends/postgresql/utils.py && \
   sed -i "s/raise AssertionError/# if raise AssertionError/" /usr/local/lib/python3.5/dist-packages/django/db/backends/postgresql/utils.py
 
