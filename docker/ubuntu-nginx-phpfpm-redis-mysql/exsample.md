@@ -17,7 +17,7 @@ https://ja.wordpress.org/
 ## 4. Dockerコンテナの取得と起動
 
 ### 4.1 Windows用
-```bash: Windows
+```bash:
 docker run -d `
  -v $home/wordpress:/develop/www:rw `
  -p 80:80 `
@@ -28,13 +28,13 @@ docker run -d `
 ```
 
 ### 4.2 Mac用
-```bash: Windows
-docker run -d `
- -v $home/wordpress:/develop/www:rw `
- -p 80:80 `
- -t -i `
- -h wordpress-server-01 `
- --name wordpress-server-01 `
+```bash:
+docker run -d \
+ -v ~/wordpress:/develop/www:rw \
+ -p 80:80 \
+ -t -i \
+ -h wordpress-server-01 \
+ --name wordpress-server-01 \
  accon/ubuntu-nginx-phpfpm-redis-mysql
 ```
 
