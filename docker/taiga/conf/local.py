@@ -1,22 +1,16 @@
-from .development import *
+from .common import *
 
-#########################################
-## GENERIC
-#########################################
+MEDIA_URL = "http://127.0.0.1/media/"
+STATIC_URL = "http://127.0.0.1/static/"
+ADMIN_MEDIA_PREFIX = "http://127.0.0.1/static/admin/"
+SITES["front"]["scheme"] = "http"
+SITES["front"]["domain"] = "127.0.0.1"
 
-#DEBUG = False
+SECRET_KEY = "theveryultratopsecretkey"
 
-#ADMINS = (
-#    ("Admin", "example@example.com"),
-#)
+DEBUG = False
+TEMPLATE_DEBUG = False
+PUBLIC_REGISTER_ENABLED = True
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'taiga',
-        'USER': 'taiga',
-        'PASSWORD': 'Taiga_Database_User_95',
-        'HOST': '',
-        'PORT': '',
-    }
-}
+DEFAULT_FROM_EMAIL = "no-reply@example.com"
+SERVER_EMAIL = DEFAULT_FROM_EMAIL

@@ -29,9 +29,10 @@ Scrum開発管理用サーバー（TAIGA）
 
 ### 3.1. ローカルPCにDockerコンテナと共有するディレクトリを作成
 
+ OS X
 ```bash:
-mkdir ~/development
-mkdir ~/development/workspace
+mkdir -p ~/productment/taiga/workspace
+mkdir ~/productment/taiga/www
 ```
 
  * data-volume/workspaceディレクトリ  
@@ -43,41 +44,18 @@ mkdir ~/development/workspace
  OS X
 ```bash:
 docker run -d \
- -v ~/development:/develop:rw \
- -p 80:80 -p 443:443 -p 3306:3306 \
- -t -i \
- -h taiga-server-01 \
- --name taiga-server-01 \
- accon/taiga:1.00
-```
-
-Windows
-```bash:
-docker run -d `
- -v F:/docker/taiga:/develop/workspace:rw `
- -p 80:80 -p 443:443 -p 3306:3306 `
- -t -i `
- -h taiga-server-01 `
- --name taiga-server-01 `
- accon/taiga:1.00
+  -v ~/productment/taiga/workspace:/develop/workspace:rw \
+  -v ~/productment/taiga/www:/develop/www:rw \
+  -p 80:80 -p 443:443 -p 5432:5432 \
+  -t -i \
+  -h taiga-server-01 \
+  --name taiga-server-01 \
+  accon/taiga:1.00
 ```
 
 #### 3.3. 動作確認
 
-下のURLにアクセスしPHPの情報が表示されればOK。
-
-* [http://127.0.0.1](http://127.0.0.1)
-* [https://127.0.0.1](https://127.0.0.1)
-
-#### 3.4. MySQLの接続
-
-```bash:
-mysql -uDevelop -pTemporary_Password --host 127.0.0.1 --port 3306 development
-```
-
-* データベース: development
-* ユーザ: Develop
-* パスワード: Temporary_Password
+#### 3.4. PostgerSQLの接続
 
 ## 4. よく使うDockerコンテナを制御するコマンド
 
@@ -130,12 +108,6 @@ docker images
 ### X.1. Dockerコンテナイメージの管理
 
 #### X.1.1. ビルド
-
-Windows
-```bash:
-cd  /git/accon/docker/taiga
-docker build -t accon/taiga:1.00 .
-```
 
 OS X
 ```bash:

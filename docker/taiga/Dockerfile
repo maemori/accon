@@ -2,7 +2,7 @@
 # TAIGA
 #
 #  用途: Scrum開発管理用サーバー
-#  構成: image[ubuntu-nginx-phpfpm-redis-mysql] + Python3 + TAIGA
+#  構成: image[ubuntu-nginx-python3-ruby-nodejs-redis-postgresql] + TAIGA
 #
 # Part of the ACCON.
 #
@@ -13,66 +13,71 @@
 # @version    1.00
 # @author     Maemori Fumihiro
 # @link       https://kurobuta.jp
-FROM accon/ubuntu-nginx-phpfpm-redis-mysql:1.10
+FROM accon/ubuntu-nginx-circus-postgresql:1.00
 MAINTAINER Maemori Fumihiro
 
-# Install dependencies
-RUN \
-  apt-get update && apt-get install -y \
-  sudo build-essential binutils-doc autoconf flex bison libjpeg-dev \
-  libfreetype6-dev zlib1g-dev libzmq3-dev libgdbm-dev libncurses5-dev \
-  automake libtool libffi-dev curl git tmux gettext netcat \
-  python3 python3-pip python3-dev virtualenvwrapper \
-  libxml2-dev libxslt-dev
-RUN \
-  pip3 install --upgrade pip && \
-  pip3 install circus gunicorn pytz
-
-# Install RDBMS
-RUN \
-  apt-get install -y postgresql-9.5 \
-  postgresql-contrib-9.5 \
-  postgresql-server-dev-9.5
-
-# Create databse
+# Create database
 RUN \
   service postgresql start && \
-  sudo -u postgres psql -c "CREATE ROLE taiga LOGIN PASSWORD 'Taiga_Database_User_95';" && \
-  sudo -u postgres createdb taiga -O taiga && \
-  echo 'local all taiga peer' | sudo -u postgres tee -a /etc/postgresql/9.5/main/pg_hba.conf && \
-  service postgresql reload
+  sudo -u postgres createuser root && \
+  sudo -u postgres createuser taiga && \
+  sudo -u postgres createdb taiga -O taiga
 
 # Install taiga-back
 RUN \
-  useradd -g 1000 -d /develop/workspace/ taiga && \
   git clone https://github.com/taigaio/taiga-back.git /develop/workspace/taiga-back && \
-  mkdir /develop/workspace/media /develop/workspace/static /develop/workspace/logs && \
   cd /develop/workspace/taiga-back && \
-  git checkout stable && \
-  pip3 install -r requirements.txt && \
-  touch /develop/workspace/taiga-back/settings/dockerenv.py && \
-  touch /develop/workspace/circus.ini
+  git checkout stable
+RUN pip3 install -r /develop/workspace/taiga-back/requirements.txt
 
-# Add Taiga Configuration
-  ADD ./conf/local.py /develop/workspace/taiga-back/settings/local.py
+# Taiga Configuration
+ADD ./conf/local.py /develop/workspace/taiga-back/settings/local.py
 
-# Timezone check none
+# Add Taiga-back Configuration
+ADD ./conf/taiga.ini /etc/circus/conf.d/
+
+# Install taiga-front
 RUN \
-  sed -i "s/if offset != 0:/# if offset != 0:/" /usr/local/lib/python3.5/dist-packages/django/db/backends/postgresql/utils.py && \
-  sed -i "s/raise AssertionError/# if raise AssertionError/" /usr/local/lib/python3.5/dist-packages/django/db/backends/postgresql/utils.py
+  git clone https://github.com/taigaio/taiga-front-dist.git /develop/workspace/taiga-front-dist && \
+  cd /develop/workspace/taiga-front-dist && \
+  git checkout stable
 
-# Populate the database with initial basic data
+# Add Taiga-front Configuration
+#ADD ./conf/conf.json /develop/workspace/taiga-front-dist/dist/
+
+# Install taiga-events
+#RUN \
+#  git clone https://github.com/taigaio/taiga-events.git /develop/workspace/taiga-events && \
+#  cd /develop/workspace/taiga-events && \
+#  git checkout master
+#RUN \
+#  cd /develop/workspace/taiga-events && \
+#  npm install && \
+#  npm install -g coffee-script && \
+#  cp config.example.json config.json
+
+# Add Taiga-events Configuration
+#ADD ./conf/taiga-events.json /develop/workspace/taiga-events/
+
+# Save the TAIGA
 RUN \
-  cd /develop/workspace/taiga-back/ && \
-  sudo -u taiga python3 manage.py migrate --noinput && \
-  sudo -u taiga python3 manage.py loaddata initial_user && \
-  sudo -u taiga python3 manage.py loaddata initial_project_templates && \
-#  sudo -u taiga python3 manage.py loaddata initial_role && \
-  sudo -u taiga python3 manage.py compilemessages && \
-  sudo -u taiga python3 manage.py collectstatic --noinput && \
-  sudo -u taiga python3 manage.py sample_data && \
+  mkdir /develop/archive && \
+  cp -ra /develop/workspace/taiga-back /develop/archive/ && \
+  cp -ra /develop/workspace/taiga-front-dist /develop/archive/
+#  cp -ra /develop/workspace/taiga-events /develop/master/ && \
+#  cp -ra /develop/workspace/static /develop/master/ && \
+#  cp -ra /develop/workspace/media /develop/master/ && \
+#  cp -ra /develop/workspace/logs /develop/master/
 
-# RUN
-  sudo -u taiga python3 manage.py runserver
-# 起動
+# Nginx conf
+#ADD ./conf/default /etc/nginx/sites-available/default
+
+# Startup file
+ADD ./module/run.sh /etc/service/run
+RUN chmod +x /etc/service/run
+
+# Public port
+EXPOSE 80 443 5432
+
+# Startup
 CMD ["/etc/service/run"]
