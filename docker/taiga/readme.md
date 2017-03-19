@@ -119,10 +119,10 @@ docker build -t accon/taiga:1.00 .
 
 ```bash:
 # push
-docker push accon/ubuntu-nginx-phpfpm-redis-mysql:1.10
+docker push accon/taiga:1.00
 # Tag
-docker tag accon/ubuntu-nginx-phpfpm-redis-mysql:1.10 accon/ubuntu-nginx-phpfpm-redis-mysql:latest
-docker push accon/ubuntu-nginx-phpfpm-redis-mysql:latest
+docker tag accon/taiga:1.00 accon/taiga:latest
+docker push accon/taiga:latest
 # None images delete
 docker images | awk '/<none/{print $3}' | xargs docker rmi
 docker images
@@ -131,6 +131,6 @@ docker images
 #### X.1.3. コンテナイメージの削除
 
 ```
-docker rmi accon/ubuntu-nginx-phpfpm-redis-mysql:latest
-docker rmi accon/ubuntu-nginx-phpfpm-redis-mysql:1.10
+docker rmi accon/taiga:latest
+docker rmi accon/taiga:1.10
 ```

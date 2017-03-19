@@ -107,7 +107,7 @@ docker images
 
 ## 5. 利用例
 
-### 5.1.
+### 5.1. TAIGA
 
 -----
 
@@ -118,7 +118,7 @@ docker images
 #### X.1.1. ビルド
 
 ```bash:
-cd ~/Develop/master/accon/v2.0/data-volume/workspace/accon/docker/ubuntu-nginx-circus-postgresql/hhh
+cd ~/Develop/master/accon/v2.0/data-volume/workspace/accon/docker/ubuntu-nginx-circus-postgresql/
 docker build -t accon/ubuntu-nginx-circus-postgresql:1.00 .
 ```
 

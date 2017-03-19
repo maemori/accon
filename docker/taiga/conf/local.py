@@ -14,3 +14,8 @@ PUBLIC_REGISTER_ENABLED = True
 
 DEFAULT_FROM_EMAIL = "no-reply@example.com"
 SERVER_EMAIL = DEFAULT_FROM_EMAIL
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_USE_TLS = False
+EMAIL_HOST = "127.0.0.1"
+EMAIL_PORT = 25

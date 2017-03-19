@@ -16,6 +16,14 @@
 FROM accon/ubuntu-nginx-circus-postgresql:1.00
 MAINTAINER Maemori Fumihiro
 
+# Add user
+RUN \
+  groupadd -g 1100 taiga && \
+  useradd -u 1100 -g 1100 -m -d /home/taiga -s /bin/bash -c 'taiga' taiga && \
+  echo 'taiga:develop' | chpasswd && \
+  gpasswd -a taiga develop && \
+  echo "### Virtualenvwrapper\nif [ -f /usr/local/bin/virtualenvwrapper.sh ]; then\n  export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3\n  export WORKON_HOME=/home/taiga/.virtualenvs\n  source /usr/local/bin/virtualenvwrapper.sh\nfi" >> /home/taiga/.bashrc
+
 # Create database
 RUN \
   service postgresql start && \
@@ -28,7 +36,6 @@ RUN \
   git clone https://github.com/taigaio/taiga-back.git /develop/workspace/taiga-back && \
   cd /develop/workspace/taiga-back && \
   git checkout stable
-RUN pip3 install -r /develop/workspace/taiga-back/requirements.txt
 
 # Taiga Configuration
 ADD ./conf/local.py /develop/workspace/taiga-back/settings/local.py
@@ -43,7 +50,7 @@ RUN \
   git checkout stable
 
 # Add Taiga-front Configuration
-#ADD ./conf/conf.json /develop/workspace/taiga-front-dist/dist/
+ADD ./conf/conf.json /develop/workspace/taiga-front-dist/dist/
 
 # Install taiga-events
 #RUN \
@@ -70,7 +77,13 @@ RUN \
 #  cp -ra /develop/workspace/logs /develop/master/
 
 # Nginx conf
-#ADD ./conf/default /etc/nginx/sites-available/default
+ADD ./conf/default /etc/nginx/sites-available/default
+
+# TAIGA setting file
+ADD ./module/taiga_setting.sh /etc/service/taiga_setting
+RUN chmod +x /etc/service/taiga_setting
+ADD ./module/progress.sh /etc/service/progress
+RUN chmod +x /etc/service/progress
 
 # Startup file
 ADD ./module/run.sh /etc/service/run
