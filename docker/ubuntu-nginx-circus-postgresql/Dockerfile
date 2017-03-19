@@ -60,9 +60,6 @@ RUN \
   update-locale LANG=ja_JP.UTF-8 LANGUAGE=ja_JP:ja && \
   echo "ja_JP.UTF-8 UTF-8" >> /etc/locale.gen && locale-gen
 
-## Ntp settings
-#RUN cp -p /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
-
 # Group and user
 RUN \
   groupadd -g 1000 develop && \
