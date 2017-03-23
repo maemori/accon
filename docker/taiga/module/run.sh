@@ -18,7 +18,6 @@ install() {
     mkdir /develop/workspace/logs
     # TAIGA file placement
     cp -ra /develop/archive/taiga-back /develop/workspace/
-    chown -R taiga:develop /develop/workspace/
     /etc/service/progress progress "[RUN2:DONE]_TAIGA_back_file_placement"
   fi
   # taiga-events initialize
@@ -27,6 +26,8 @@ install() {
     cp -ra /develop/archive/taiga-events /develop/workspace/
     /etc/service/progress progress "[RUN3:DONE]_TAIGA_events_file_placement"
   fi
+  chown -R taiga:develop /develop/workspace/
+  chnod -R g+w /develop/workspace/
   # Python virtual env
   VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
   WORKON_HOME=/develop/workspace/.virtualenvs
@@ -50,12 +51,16 @@ service redis-server start
 /etc/service/progress progress "[SERVICE:START]_redis-server"
 service circusd start
 /etc/service/progress progress "[SERVICE:START]_circusd"
+sleep 3
 circusctl start taiga
 /etc/service/progress progress "[SERVICE:START]_taiga"
+sleep 3
 circusctl start taiga-celery
 /etc/service/progress progress "[SERVICE:START]_taiga-celery"
-nohup coffee /develop/workspace/taiga-events/index.coffee < /dev/null 2>&1 /dev/null &
+sleep 3
+nohup coffee /develop/workspace/taiga-events/index.coffee > /dev/null 2>&1 &
 /etc/service/progress progress "[SERVICE:START]_coffee"
+sleep 3
 circusctl start taiga-events
 /etc/service/progress progress "[SERVICE:START]_taiga-events"
 service nginx restart
