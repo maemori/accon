@@ -27,7 +27,7 @@ install() {
     /etc/service/progress progress "[RUN3:DONE]_TAIGA_events_file_placement"
   fi
   chown -R taiga:develop /develop/workspace/
-  chnod -R g+w /develop/workspace/
+  chmod -R g+w /develop/workspace/
   # Python virtual env
   VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
   WORKON_HOME=/develop/workspace/.virtualenvs

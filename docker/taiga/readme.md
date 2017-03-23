@@ -50,7 +50,7 @@ docker run -d \
   -t -i \
   -h taiga-server-01 \
   --name taiga-server-01 \
-  accon/taiga:1.00
+  accon/taiga:1.01
 ```
 
 #### 3.3. 動作確認
@@ -112,16 +112,16 @@ docker images
 OS X
 ```bash:
 cd ~/Develop/master/accon/v2.0/data-volume/workspace/accon/docker/taiga
-docker build -t accon/taiga:1.00 .
+docker build -t accon/taiga:1.01 .
 ```
 
 #### X.1.2. レポジトリにプッシュ
 
 ```bash:
 # push
-docker push accon/taiga:1.00
+docker push accon/taiga:1.01
 # Tag
-docker tag accon/taiga:1.00 accon/taiga:latest
+docker tag accon/taiga:1.01 accon/taiga:latest
 docker push accon/taiga:latest
 # None images delete
 docker images | awk '/<none/{print $3}' | xargs docker rmi
@@ -132,5 +132,5 @@ docker images
 
 ```
 docker rmi accon/taiga:latest
-docker rmi accon/taiga:1.10
+docker rmi accon/taiga:1.00
 ```
