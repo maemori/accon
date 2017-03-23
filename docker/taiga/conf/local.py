@@ -1,4 +1,5 @@
 from .common import *
+from .celery import *
 
 MEDIA_URL = "http://127.0.0.1/media/"
 STATIC_URL = "http://127.0.0.1/static/"
@@ -19,3 +20,10 @@ EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_USE_TLS = False
 EMAIL_HOST = "127.0.0.1"
 EMAIL_PORT = 25
+
+BROKER_URL = 'amqp://guest:guest@localhost:5672//'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+CELERY_ENABLED = True
+
+EVENTS_PUSH_BACKEND = "taiga.events.backends.rabbitmq.EventsPushBackend"
+EVENTS_PUSH_BACKEND_OPTIONS = {"url": "amqp://taiga:taiga@localhost:5672/taiga"}

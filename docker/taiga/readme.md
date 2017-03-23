@@ -46,7 +46,7 @@ mkdir ~/productment/taiga/www
 docker run -d \
   -v ~/productment/taiga/workspace:/develop/workspace:rw \
   -v ~/productment/taiga/www:/develop/www:rw \
-  -p 80:80 -p 443:443 -p 5432:5432 \
+  -p 80:80 -p 443:443 -p 5432:5432 -p 15672:15672 \
   -t -i \
   -h taiga-server-01 \
   --name taiga-server-01 \

@@ -2,7 +2,7 @@
 # ubuntu-nginx-python3-postgresql
 #
 #  用途: 開発環境の基礎構成
-#  構成: Ubuntu + Nginx(ssl) + Python3 + Circus + PostgreSQL
+#  構成: Ubuntu + Nginx(ssl) + Python3 + Node + Circus + PostgreSQL
 #
 # Part of the ACCON.
 #
@@ -38,8 +38,7 @@ RUN \
 
 ## Server
 RUN \
-  apt-get update && \
-  DEBIAN_FRONTEND="noninteractive" apt-get install -y \
+  apt-get update && DEBIAN_FRONTEND="noninteractive" apt-get install -y \
     openssl openssh-server libssl-dev \
     nginx \
     redis-server \
@@ -52,8 +51,19 @@ RUN \
 ## Python3
 RUN \
   apt-get update && apt-get install -y python3 python3-pip python3-dev && \
-  pip3 install --upgrade pip && \
-  pip3 install virtualenv virtualenvwrapper circus
+    pip3 install --upgrade pip && \
+    pip3 install virtualenv virtualenvwrapper circus
+
+## Nodejs & coffee-script
+RUN \
+  apt-get update && apt-get install -y nodejs npm && \
+    npm cache clean && \
+    npm install n -g && \
+    n stable && \
+    n 7 && \
+    ln -s /usr/bin/nodejs /usr/bin/node && \
+    npm install -g gulp && \
+    npm install -g coffee-script
 
 # Language settings
 RUN \
@@ -79,6 +89,15 @@ RUN \
   chown -R develop:develop /develop
 
 # Settings
+## RabbitMQ (wget http://localhost:15672)
+RUN \
+  service rabbitmq-server start && \
+  rabbitmq-plugins enable rabbitmq_management && \
+  cd /tmp && \
+  wget http://localhost:15672/cli/rabbitmqadmin && \
+  chmod 755 rabbitmqadmin && \
+  mv rabbitmqadmin /usr/sbin/
+
 ## Nginx
 ADD ./conf/nginx.conf /etc/nginx/nginx.conf
 ADD ./conf/default /etc/nginx/sites-available/default
@@ -107,8 +126,8 @@ RUN \
 
 ## Python3
 RUN \
- echo "### Virtualenvwrapper\nif [ -f /usr/local/bin/virtualenvwrapper.sh ]; then\n  export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3\n  WORKON_HOME=$HOME/.virtualenvs\n  source /usr/local/bin/virtualenvwrapper.sh\nfi" >> /root/.bashrc && \
- echo "### Virtualenvwrapper\nif [ -f /usr/local/bin/virtualenvwrapper.sh ]; then\n  export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3\n  export WORKON_HOME=/home/develop/.virtualenvs\n  source /usr/local/bin/virtualenvwrapper.sh\nfi" >> /home/develop/.bashrc
+  echo "### Virtualenvwrapper\nif [ -f /usr/local/bin/virtualenvwrapper.sh ]; then\n  export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3\n  WORKON_HOME=$HOME/.virtualenvs\n  source /usr/local/bin/virtualenvwrapper.sh\nfi" >> /root/.bashrc && \
+  echo "### Virtualenvwrapper\nif [ -f /usr/local/bin/virtualenvwrapper.sh ]; then\n  export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3\n  export WORKON_HOME=/home/develop/.virtualenvs\n  source /usr/local/bin/virtualenvwrapper.sh\nfi" >> /home/develop/.bashrc
 
 # Installation of startup file
 ADD ./module/run.sh /etc/service/run
@@ -118,7 +137,7 @@ RUN chmod +x /etc/service/run
 RUN apt-get -y autoremove && apt-get -y autoclean
 
 # Pubkic ports
-EXPOSE 80 443 5432
+EXPOSE 80 443 15672 5432
 
 # Startup
 CMD ["/etc/service/run"]

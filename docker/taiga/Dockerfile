@@ -22,6 +22,11 @@ RUN \
   useradd -u 1100 -g 1100 -m -d /home/taiga -s /bin/bash -c 'taiga' taiga && \
   echo 'taiga:develop' | chpasswd && \
   gpasswd -a taiga develop && \
+  gpasswd -a taiga sudo && \
+  gpasswd -a taiga postgres && \
+  gpasswd -a taiga rabbitmq && \
+  gpasswd -a taiga www-data && \
+  echo "taiga ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers && \
   echo "### Virtualenvwrapper\nif [ -f /usr/local/bin/virtualenvwrapper.sh ]; then\n  export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3\n  export WORKON_HOME=/home/taiga/.virtualenvs\n  source /usr/local/bin/virtualenvwrapper.sh\nfi" >> /home/taiga/.bashrc
 
 # Create database
@@ -43,6 +48,9 @@ ADD ./conf/local.py /develop/workspace/taiga-back/settings/local.py
 # Add Taiga-back Configuration
 ADD ./conf/taiga.ini /etc/circus/conf.d/
 
+# Add Taiga-celery Configuration
+ADD ./conf/taiga-celery.ini /etc/circus/conf.d/
+
 # Install taiga-front
 RUN \
   git clone https://github.com/taigaio/taiga-front-dist.git /develop/workspace/taiga-front-dist && \
@@ -53,31 +61,29 @@ RUN \
 ADD ./conf/conf.json /develop/workspace/taiga-front-dist/dist/
 
 # Install taiga-events
-#RUN \
-#  git clone https://github.com/taigaio/taiga-events.git /develop/workspace/taiga-events && \
-#  cd /develop/workspace/taiga-events && \
-#  git checkout master
-#RUN \
-#  cd /develop/workspace/taiga-events && \
-#  npm install && \
-#  npm install -g coffee-script && \
-#  cp config.example.json config.json
+RUN \
+  git clone https://github.com/taigaio/taiga-events.git /develop/workspace/taiga-events
+
+# Creating a taiga user and virtualhost for rabbitmq
+RUN \
+  service rabbitmq-server start && \
+  rabbitmqctl add_user taiga taiga && \
+  rabbitmqctl add_vhost taiga && \
+  rabbitmqctl set_permissions -p taiga taiga ".*" ".*" ".*"
 
 # Add Taiga-events Configuration
-#ADD ./conf/taiga-events.json /develop/workspace/taiga-events/
+ADD ./conf/events-config.json /develop/workspace/taiga-events/config.json
+ADD ./conf/taiga-events.ini /etc/circus/conf.d/
 
 # Save the TAIGA
 RUN \
   mkdir /develop/archive && \
   cp -ra /develop/workspace/taiga-back /develop/archive/ && \
-  cp -ra /develop/workspace/taiga-front-dist /develop/archive/
-#  cp -ra /develop/workspace/taiga-events /develop/master/ && \
-#  cp -ra /develop/workspace/static /develop/master/ && \
-#  cp -ra /develop/workspace/media /develop/master/ && \
-#  cp -ra /develop/workspace/logs /develop/master/
+  cp -ra /develop/workspace/taiga-front-dist /develop/archive/ && \
+  cp -ra /develop/workspace/taiga-events /develop/archive/
 
 # Nginx conf
-ADD ./conf/default /etc/nginx/sites-available/default
+ADD ./conf/default /etc/nginx/sites-available/
 
 # TAIGA setting file
 ADD ./module/taiga_setting.sh /etc/service/taiga_setting
@@ -90,7 +96,7 @@ ADD ./module/run.sh /etc/service/run
 RUN chmod +x /etc/service/run
 
 # Public port
-EXPOSE 80 443 5432
+EXPOSE 80 443 15672 5432
 
 # Startup
 CMD ["/etc/service/run"]

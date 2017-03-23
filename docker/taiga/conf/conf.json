@@ -1,6 +1,6 @@
 {
     "api": "http://127.0.0.1/api/v1/",
-    "eventsUrl": null,
+    "eventsUrl": "ws://127.0.0.1/events",
     "eventsMaxMissedHeartbeats": 5,
     "eventsHeartbeatIntervalTime": 60000,
     "eventsReconnectTryInterval": 10000,
