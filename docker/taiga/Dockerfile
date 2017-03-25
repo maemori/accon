@@ -79,9 +79,9 @@ ADD ./conf/taiga-events.ini /etc/circus/conf.d/
 # Save the TAIGA
 RUN \
   mkdir /develop/archive && \
-  cp -ra /develop/workspace/taiga-back /develop/archive/ && \
-  cp -ra /develop/workspace/taiga-front-dist /develop/archive/ && \
-  cp -ra /develop/workspace/taiga-events /develop/archive/
+  mv /develop/workspace/taiga-back /develop/archive/ && \
+  mv /develop/workspace/taiga-front-dist /develop/archive/ && \
+  mv /develop/workspace/taiga-events /develop/archive/
 
 # Nginx conf
 ADD ./conf/default /etc/nginx/sites-available/
