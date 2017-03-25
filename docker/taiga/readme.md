@@ -41,21 +41,33 @@ mkdir ~/productment/taiga/www
 
 ### 3.2. Dockerコンテナの取得と起動
 
+```bash:
+docker run -d -p 80:80 -t -i -h taiga --name taiga accon/taiga
+```
+
  OS X
 ```bash:
 docker run -d \
   -v ~/productment/taiga/workspace:/develop/workspace:rw \
   -v ~/productment/taiga/www:/develop/www:rw \
-  -p 80:80 -p 443:443 -p 5432:5432 -p 15672:15672 \
+  -p 80:80 -p 443:443 -p 5432:5432 \
   -t -i \
   -h taiga-server-01 \
   --name taiga-server-01 \
-  accon/taiga:1.01
+  accon/taiga
 ```
 
 #### 3.3. 動作確認
 
+ * http://127/0.0.1
+
 #### 3.4. PostgerSQLの接続
+
+ * Host: 127.0.0.1
+ * Port: 5432
+ * Datavese: taiga
+ * User: taiga
+ * Passwoord: taiga
 
 ## 4. よく使うDockerコンテナを制御するコマンド
 
@@ -111,17 +123,20 @@ docker images
 
 OS X
 ```bash:
+docker rmi accon/taiga:1.02
+docker rmi accon/taiga:latest
+docker images
 cd ~/Develop/master/accon/v2.0/data-volume/workspace/accon/docker/taiga
-docker build -t accon/taiga:1.01 .
+docker build -t accon/taiga:1.02 .
 ```
 
 #### X.1.2. レポジトリにプッシュ
 
 ```bash:
 # push
-docker push accon/taiga:1.01
+docker push accon/taiga:1.02
 # Tag
-docker tag accon/taiga:1.01 accon/taiga:latest
+docker tag accon/taiga:1.02 accon/taiga:latest
 docker push accon/taiga:latest
 # None images delete
 docker images | awk '/<none/{print $3}' | xargs docker rmi

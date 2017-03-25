@@ -51,20 +51,14 @@ service redis-server start
 /etc/service/progress progress "[SERVICE:START]_redis-server"
 service circusd start
 /etc/service/progress progress "[SERVICE:START]_circusd"
-sleep 3
-circusctl start taiga
-/etc/service/progress progress "[SERVICE:START]_taiga"
-sleep 3
-circusctl start taiga-celery
-/etc/service/progress progress "[SERVICE:START]_taiga-celery"
-sleep 3
 nohup coffee /develop/workspace/taiga-events/index.coffee > /dev/null 2>&1 &
 /etc/service/progress progress "[SERVICE:START]_coffee"
-sleep 3
-circusctl start taiga-events
+python3 -m circus.circusctl start taiga
+/etc/service/progress progress "[SERVICE:START]_taiga"
+python3 -m circus.circusctl start taiga-celery
+/etc/service/progress progress "[SERVICE:START]_taiga-celery"
+python3 -m circus.circusctl start taiga-events
 /etc/service/progress progress "[SERVICE:START]_taiga-events"
-service nginx restart
-/etc/service/progress progress "[SERVICE:RESTART]_nginx"
 
 /etc/service/progress end
 

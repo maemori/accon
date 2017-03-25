@@ -34,7 +34,8 @@ RUN \
   service postgresql start && \
   sudo -u postgres createuser root && \
   sudo -u postgres createuser taiga && \
-  sudo -u postgres createdb taiga -O taiga
+  sudo -u postgres createdb taiga -O taiga && \
+  sudo -u postgres psql -c "alter role taiga with password 'taiga';"
 
 # Install taiga-back
 RUN \
