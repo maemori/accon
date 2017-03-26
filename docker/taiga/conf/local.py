@@ -26,4 +26,4 @@ CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
 CELERY_ENABLED = True
 
 EVENTS_PUSH_BACKEND = "taiga.events.backends.rabbitmq.EventsPushBackend"
-EVENTS_PUSH_BACKEND_OPTIONS = {"url": "amqp://guest:guest@localhost:5672"}
+EVENTS_PUSH_BACKEND_OPTIONS = {"url": "amqp://taiga:taiga@localhost/taiga:5672"}

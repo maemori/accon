@@ -1,8 +1,15 @@
 #!/usr/bin/env bash
 /etc/service/progress start
 service postgresql start
+service rabbitmq-server start
+service redis-server start
 service nginx start
 service postfix start
+
+# Creating a taiga user and virtualhost for rabbitmq
+rabbitmqctl add_user taiga taiga
+rabbitmqctl add_vhost /taiga
+rabbitmqctl set_permissions -p /taiga taiga ".*" ".*" ".*"
 
 # install
 install() {
@@ -28,6 +35,8 @@ install() {
   fi
   chown -R taiga:develop /develop/workspace/
   chmod -R g+w /develop/workspace/
+  chown -R taiga:develop /develop/www/
+  chmod -R g+w /develop/www/
   # Python virtual env
   VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
   WORKON_HOME=/develop/workspace/.virtualenvs
@@ -44,10 +53,7 @@ install() {
 # TAIGA installi
 install
 
-# Service start
-service rabbitmq-server start
-/etc/service/progress progress "[SERVICE:START]_rabbitmq-server"
-service redis-server start
+# TAIGA start
 /etc/service/progress progress "[SERVICE:START]_redis-server"
 service circusd start
 /etc/service/progress progress "[SERVICE:START]_circusd"
@@ -55,6 +61,8 @@ python3 -m circus.circusctl start taiga
 /etc/service/progress progress "[SERVICE:START]_taiga"
 python3 -m circus.circusctl start taiga-celery
 /etc/service/progress progress "[SERVICE:START]_taiga-celery"
+nohup coffee /develop/workspace/taiga-events/index.coffee > /dev/null 2>&1 &
+/etc/service/progress progress "[SERVICE:START]_coffee"
 python3 -m circus.circusctl start taiga-events
 /etc/service/progress progress "[SERVICE:START]_taiga-events"
 

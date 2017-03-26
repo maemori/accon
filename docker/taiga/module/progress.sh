@@ -16,6 +16,7 @@ progress_start() {
   echo "<SCRIPT LANGUAGE='JavaScript'> setTimeout('location.reload()',1000*5);</SCRIPT>" >> /develop/www/install.html
   echo "<p>"`date`"</p>" >> /develop/www/install.html
   echo "<p>"$status_message"</p>" >> /develop/www/install.html
+  chmod 666 /develop/www/install.html
   touch $workspace_dir"/"$status_message
   return 0
 }

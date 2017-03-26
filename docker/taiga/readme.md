@@ -54,7 +54,7 @@ docker run -d \
   -t -i \
   -h taiga\
   --name taiga \
-  accon/taiga
+  accon/taiga:1.05
 ```
 
 #### 3.3. 動作確認
@@ -124,7 +124,7 @@ docker images
 
 OS X
 ```bash:
-docker rmi accon/taiga:1.04
+docker rmi accon/taiga:1.05
 docker rmi accon/taiga:latest
 docker images
 cd ~/Develop/master/accon/v2.0/data-volume/workspace/accon/docker/taiga
