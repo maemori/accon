@@ -1,6 +1,6 @@
 {
-    "url": "amqp://taiga:taiga@localhost/taiga:5672",
-    "secret": "theveryultratopsecretkey",
+    "url": "amqp://taiga:PASSWORD@localhost:5672/taiga",
+    "secret": "mysecret",
     "webSocketServer": {
         "port": 8888
     }

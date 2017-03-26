@@ -7,9 +7,9 @@ service nginx start
 service postfix start
 
 # Creating a taiga user and virtualhost for rabbitmq
-rabbitmqctl add_user taiga taiga
-rabbitmqctl add_vhost /taiga
-rabbitmqctl set_permissions -p /taiga taiga ".*" ".*" ".*"
+rabbitmqctl add_user taiga PASSWORD
+rabbitmqctl add_vhost taiga
+rabbitmqctl set_permissions -p taiga taiga ".*" ".*" ".*"
 
 # install
 install() {
