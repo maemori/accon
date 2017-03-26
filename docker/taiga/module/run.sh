@@ -51,8 +51,6 @@ service redis-server start
 /etc/service/progress progress "[SERVICE:START]_redis-server"
 service circusd start
 /etc/service/progress progress "[SERVICE:START]_circusd"
-nohup coffee /develop/workspace/taiga-events/index.coffee > /dev/null 2>&1 &
-/etc/service/progress progress "[SERVICE:START]_coffee"
 python3 -m circus.circusctl start taiga
 /etc/service/progress progress "[SERVICE:START]_taiga"
 python3 -m circus.circusctl start taiga-celery

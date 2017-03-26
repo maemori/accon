@@ -32,4 +32,5 @@ python3 manage.py collectstatic --noinput >> /develop/workspace/install.log
 # Events front module install (Node:Version 7)
 cd /develop/workspace/taiga-events/
 npm install
+nohup gulp > /dev/null 2>&1 &
 /etc/service/progress progress "[SETTING:DONE-8_of_8]_Events_setting"

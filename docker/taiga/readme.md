@@ -50,16 +50,17 @@ docker run -d -p 80:80 -t -i -h taiga --name taiga accon/taiga
 docker run -d \
   -v ~/productment/taiga/workspace:/develop/workspace:rw \
   -v ~/productment/taiga/www:/develop/www:rw \
-  -p 80:80 -p 443:443 -p 5432:5432 \
+  -p 80:80 -p 443:443 -p 5432:5432 -p 15672:15672 \
   -t -i \
-  -h taiga-server-01 \
-  --name taiga-server-01 \
+  -h taiga\
+  --name taiga \
   accon/taiga
 ```
 
 #### 3.3. 動作確認
 
- * http://127/0.0.1
+ * http://localhost
+ * http://localhost:15672/
 
 #### 3.4. PostgerSQLの接続
 
@@ -74,25 +75,25 @@ docker run -d \
 * コンテナのコンソールに接続
 
 ```bash:
-docker exec -it taiga-server-01 bash
+docker exec -it taiga bash
 ```
 
 * コンテナのスタート
 
 ```bash:
-docker start taiga-server-01
+docker start taiga
 ```
 
 * コンテナのストップ
 
 ```bash:
-docker stop taiga-server-01
+docker stop taiga
 ```
 
 * コンテナの削除
 
 ```bash:
-docker rm taiga-server-01
+docker rm taiga
 ```
 
 * 起動中コンテナの確認
@@ -123,20 +124,20 @@ docker images
 
 OS X
 ```bash:
-docker rmi accon/taiga:1.02
+docker rmi accon/taiga:1.04
 docker rmi accon/taiga:latest
 docker images
 cd ~/Develop/master/accon/v2.0/data-volume/workspace/accon/docker/taiga
-docker build -t accon/taiga:1.02 .
+docker build -t accon/taiga:1.05 .
 ```
 
 #### X.1.2. レポジトリにプッシュ
 
 ```bash:
 # push
-docker push accon/taiga:1.02
+docker push accon/taiga:1.05
 # Tag
-docker tag accon/taiga:1.02 accon/taiga:latest
+docker tag accon/taiga:1.05 accon/taiga:latest
 docker push accon/taiga:latest
 # None images delete
 docker images | awk '/<none/{print $3}' | xargs docker rmi

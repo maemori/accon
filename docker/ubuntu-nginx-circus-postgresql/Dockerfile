@@ -2,7 +2,7 @@
 # ubuntu-nginx-python3-postgresql
 #
 #  用途: 開発環境の基礎構成
-#  構成: Ubuntu + Nginx(ssl) + Python3 + Node + Circus + PostgreSQL
+#  構成: Ubuntu + Nginx(ssl) + Python3 + Node + Circus + RabbitMQ + PostgreSQL
 #
 # Part of the ACCON.
 #
@@ -128,6 +128,9 @@ RUN \
 RUN \
   echo "### Virtualenvwrapper\nif [ -f /usr/local/bin/virtualenvwrapper.sh ]; then\n  export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3\n  WORKON_HOME=$HOME/.virtualenvs\n  source /usr/local/bin/virtualenvwrapper.sh\nfi" >> /root/.bashrc && \
   echo "### Virtualenvwrapper\nif [ -f /usr/local/bin/virtualenvwrapper.sh ]; then\n  export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3\n  export WORKON_HOME=/home/develop/.virtualenvs\n  source /usr/local/bin/virtualenvwrapper.sh\nfi" >> /home/develop/.bashrc
+
+##  RabbitMQ
+ADD ./conf/rabbitmq.config /etc/rabbitmq/rabbitmq.config
 
 # Installation of startup file
 ADD ./module/run.sh /etc/service/run

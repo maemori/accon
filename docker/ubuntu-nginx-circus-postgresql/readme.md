@@ -41,7 +41,7 @@ docker run -d \
   -t -i \
   -h develop-server-01 \
   --name develop-server-01 \
-  accon/ubuntu-nginx-circus-postgresql:1.00
+  accon/ubuntu-nginx-circus-postgresql:1.01
 ```
 
 ### 3.3. 動作確認用ファイルの設置
@@ -119,7 +119,7 @@ docker images
 
 ```bash:
 cd ~/Develop/master/accon/v2.0/data-volume/workspace/accon/docker/ubuntu-nginx-circus-postgresql/
-docker build -t accon/ubuntu-nginx-circus-postgresql:1.00 .
+docker build -t accon/ubuntu-nginx-circus-postgresql:1.01 .
 ```
 
 ----
@@ -128,9 +128,9 @@ docker build -t accon/ubuntu-nginx-circus-postgresql:1.00 .
 
 ```bash:
 # push
-docker push accon/ubuntu-nginx-circus-postgresql:1.00
+docker push accon/ubuntu-nginx-circus-postgresql:1.01
 # Tag
-docker tag accon/ubuntu-nginx-circus-postgresql:1.00 accon/ubuntu-nginx-circus-postgresql:latest
+docker tag accon/ubuntu-nginx-circus-postgresql:1.01 accon/ubuntu-nginx-circus-postgresql:latest
 docker push accon/ubuntu-nginx-circus-postgresql:latest
 # None images delete
 docker images | awk '/<none/{print $3}' | xargs docker rmi

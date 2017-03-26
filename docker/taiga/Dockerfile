@@ -13,7 +13,7 @@
 # @version    1.01
 # @author     Maemori Fumihiro
 # @link       https://kurobuta.jp
-FROM accon/ubuntu-nginx-circus-postgresql:1.00
+FROM accon/ubuntu-nginx-circus-postgresql:1.01
 MAINTAINER Maemori Fumihiro
 
 # Add user
@@ -65,13 +65,6 @@ ADD ./conf/conf.json /develop/workspace/taiga-front-dist/dist/
 RUN \
   git clone https://github.com/taigaio/taiga-events.git /develop/workspace/taiga-events
 
-# Creating a taiga user and virtualhost for rabbitmq
-RUN \
-  service rabbitmq-server start && \
-  rabbitmqctl add_user taiga taiga && \
-  rabbitmqctl add_vhost taiga && \
-  rabbitmqctl set_permissions -p taiga taiga ".*" ".*" ".*"
-
 # Add Taiga-events Configuration
 ADD ./conf/events-config.json /develop/workspace/taiga-events/config.json
 ADD ./conf/taiga-events.ini /etc/circus/conf.d/
@@ -97,7 +90,7 @@ ADD ./module/run.sh /etc/service/run
 RUN chmod +x /etc/service/run
 
 # Public port
-EXPOSE 80 443 15672 5432
+EXPOSE 80 443 5432 15672
 
 # Startup
 CMD ["/etc/service/run"]
