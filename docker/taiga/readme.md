@@ -24,9 +24,9 @@ Taiga.ioは、オープンソースとして公開されているプロジェク
 
 ## 3. 構成要素
 
-必要なミドルウェアの構成は「[accon/ubuntu-nginx-circus-postgresql](https://github.com/maemori/accon/tree/master/docker/ubuntu-nginx-circus-postgresql)」コンテナを使用して構築されています。  
+必要なミドルウェアは「[accon/ubuntu-nginx-circus-postgresql](https://github.com/maemori/accon/tree/master/docker/ubuntu-nginx-circus-postgresql)」コンテナを使用しています。  
 当コンテナは「[accon/ubuntu-nginx-circus-postgresql](https://github.com/maemori/accon/tree/master/docker/ubuntu-nginx-circus-postgresql)」コンテナの上に構築されています。
-詳細な内容はDockerHUBをご参照ください。
+詳細な内容は[Docker Hub](https://hub.docker.com/r/accon/ubuntu-nginx-circus-postgresql/)をご参照ください。
 
 ## 3. 利用方法（通常使用）
 
