@@ -1,5 +1,5 @@
 # Short Description
-All-in-One Web(Python3)開発環境 （Ubuntu + Nginx(ssl) + Python3  + Circus + Django + RabbitMQ + Node + coffee + Redis + PostgreSQL）
+All-in-One Web(Python3)開発環境 （Ubuntu + Nginx(ssl) + Python3 + Circus + Django + RabbitMQ + Node + Coffee + Redis + PostgreSQL）
 
 # Full Description
 
