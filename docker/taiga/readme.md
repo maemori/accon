@@ -1,51 +1,80 @@
-# Memo
-https://taigaio.github.io/taiga-doc/dist/setup-development.html
-https://github.com/htdvisser/taiga-docker
-
 # Short Description
-Scrum開発管理用サーバー（TAIGA）
+プロジェクト管理プラットフォーム: TAIGA  
+主な機能 : エピック・ユーザストーリ・スプリント・タスクボード・かんばん・課題・情報共有(Wiki)の運用。
+※ 日本語対応、リアルタイム更新
 
 # Full Description
 
-## ● [Dockerfileは、こちら(GitHub)](https://github.com/maemori/accon/blob/master/docker/taiga/Dockerfile)
+## ● [Dockerfileのコード、こちら(GitHub)](https://github.com/maemori/accon/tree/master/docker/taiga)
 
-## ● [Dockerfile一式は、こちらからダウンロード](https://kurobuta.jp/download/get/XX)
+## ● [Dockerfile一式は、こちらからダウンロード](https://kurobuta.jp/download/get/19)
 
 -----
 
 ## 1. 概要
 
-アジャイルプロジェクト管理ツール.
+Taiga.ioは、オープンソースとして公開されているプロジェクト管理プラットフォーム。  
 
-## 2. 構成バージョン
+## 2. TAIGAサービス構成要素
 
- * Ubuntu: 16.10 LTS (日本語対応)
- * Nginx: 1.10
- * Python: 3.5
- * PostgreSQL: 9.5
- * Redis: 3.2
+ * taiga-front : フロントエンドサービス。anglejsとcoffeescriptで構築されたフロントエンド関連のコードで構成されています。
+ * taiga-back : バックエンドサービス。djangoとpython3を使って構築されたapiで構成されています。
+ * taiga-events : フロントエンドをリアルタイム更新するためのサービス。WebSocketサーバーとして動作し、バックログ、タスク・ボード、かんばん、課題をリアルタイムに更新します。
+ * taiga-celery : 非同期タスク実行サービス。webhooksやimport/exportなどを非同期で実行します。
 
-## 3. 利用方法
+## 3. 構成要素
 
-### 3.1. ローカルPCにDockerコンテナと共有するディレクトリを作成
+必要なミドルウェアの構成は「[accon/ubuntu-nginx-circus-postgresql](https://github.com/maemori/accon/tree/master/docker/ubuntu-nginx-circus-postgresql)」コンテナを使用して構築されています。  
+当コンテナは「[accon/ubuntu-nginx-circus-postgresql](https://github.com/maemori/accon/tree/master/docker/ubuntu-nginx-circus-postgresql)」コンテナの上に構築されています。
+詳細な内容はDockerHUBをご参照ください。
 
- OS X
-```bash:
-mkdir -p ~/productment/taiga/workspace
-mkdir ~/productment/taiga/www
-```
+## 3. 利用方法（通常使用）
 
- * data-volume/workspaceディレクトリ  
-  Dockerコンテナの/develop/workspaceディレクトリにマウントされます。
-  Webアプリケーションのプロジェクトが配置されます。
-
-### 3.2. Dockerコンテナの取得と起動
+### 3.1. Dockerコンテナの取得と起動
 
 ```bash:
 docker run -d -p 80:80 -t -i -h taiga --name taiga accon/taiga
 ```
 
- OS X
+最新のTAIGAコンテナをダウンロードしTAIGAサーバーを起動しインストールが開始されます。
+
+### 3.2. TAIGAのインストール状況の確認
+
+ブラウザで[http://localhost/install.html](http://localhost/install.html)にアクセスするとインストールの状況を確認できます。(5秒間隔で更新されます)  
+「PROGRESS_[INSTALLATION_COMPLETE]」と表示されればインストールは完了です。
+
+### 3.3. TAIGAの利用開始
+
+ブラウザで[http://localhost](http://localhost)にアクセスします。  
+adminユーザ（初期パスワードは123123）もしくは新規にユーザを作成してログインを行います。  
+
+#### 日本語化は右上のアカウントメニューの「Edit Profil」を実行しLanguageを「日本語」に変更します。
+
+### 3.3. TAIGAの利用方法
+
+[taiga.io（公式）](https://tree.taiga.io/support/)をご参照ください。
+
+## 4. 利用方法（開発・カスタマイズ）
+
+### 4.1. ローカルPCにDockerコンテナと共有するディレクトリを作成
+
+data-volumeのマウント
+
+```bash:
+mkdir -p ~/productment/taiga/workspace
+mkdir ~/productment/taiga/www
+```
+
+ * productment/taiga/workspaceディレクトリ  
+  Dockerコンテナの/develop/workspaceディレクトリにマウントされます。
+  TAIGAアプリケーションのバックエンドのプロジェクトが配置されます。
+
+ * productment/taiga/wwwディレクトリ  
+  Dockerコンテナの/develop/wwwディレクトリにマウントされます。
+  TAIGAのフロントエンドのプロジェクトが配置されます。
+
+### 4.2. Dockerコンテナの取得と起動
+
 ```bash:
 docker run -d \
   -v ~/productment/taiga/workspace:/develop/workspace:rw \
@@ -59,8 +88,8 @@ docker run -d \
 
 #### 3.3. 動作確認
 
- * http://localhost
- * http://localhost:15672/
+* TAIGA - [http://localhost](http://localhost)
+* RabbitMQ - [http://localhost:15672/](http://localhost:15672/)
 
 #### 3.4. PostgerSQLの接続
 

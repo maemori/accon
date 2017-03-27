@@ -10,7 +10,7 @@
 # This software is released under the MIT License.
 # http://opensource.org/licenses/mit-license.php
 #
-# @version    1.00
+# @version    1.01
 # @author     Maemori Fumihiro
 # @link       https://kurobuta.jp
 FROM ubuntu:16.10

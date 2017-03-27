@@ -1,29 +1,35 @@
 # Short Description
-All-in-One PHP開発環境 （Ubuntu, Nginx, PHP, PHP-FPM, xdebug, Redis, MySQL）
+All-in-One PHP開発環境 （Ubuntu + Nginx(ssl) + Python3  + Circus + Django + RabbitMQ + Node + coffee + Redis + PostgreSQL）
 
 # Full Description
 
 ## ● [Dockerfileは、こちら(GitHub)](https://github.com/maemori/accon/blob/master/docker/ubuntu-nginx-circus-postgresql/Dockerfile)
 
-## ● [Dockerfile一式は、こちらからダウンロード](https://kurobuta.jp/download/get/15)
+## ● [Dockerfile一式は、こちらからダウンロード](https://kurobuta.jp/download/get/18)
 
 -----
 
 ## 1. 概要
 
-PHPのWebアプリケーションに特化したローカル開発環境。  
+PythonのWebアプリケーションに特化したローカル開発環境。  
 ローカルPCの開発用ディレクトリをDockerコンテナと共有し、そのUbuntu上で実行・開発・デバッグを行うための環境。
 
 ## 2. 構成バージョン
 
  * Ubuntu: 16.10 LTS (日本語対応)
  * Nginx: 1.10
- * xdebug: 2.4
+ * Python3: 3.5.2
+ * Circus: 0.14.0
+ * Django: 1.10.6
+ * RabbitMQ: 3.5.7
+ * Node: 7.7.4
+ * coffee: 1.12.4
  * Redis: 3.2
+ * PostgreSQL: 9.5.6
 
 ## 3. 利用方法
 
-### 3.1. ローカルPCにDockerコンテナと共有するディレクトリを作成
+### 3.1. ローカルPCにDockerコンテナと共有するディレクトリを作成(workspacとwwwの配置場所は任意)
 
 ```bash:
 mkdir ~/productment
@@ -37,12 +43,18 @@ mkdir ~/productment/ubuntu-nginx-circus-postgresql/www
 docker run -d \
   -v ~/productment/ubuntu-nginx-circus-postgresql/workspace:/develop/workspace:rw \
   -v ~/productment/ubuntu-nginx-circus-postgresql/www:/develop/www:rw \
-  -p 80:80 -p 443:443 -p 3306:3306 \
+  -p 80:80 -p 443:443 -p 5432:5432 -p 15672:15672 \
   -t -i \
   -h develop-server-01 \
   --name develop-server-01 \
   accon/ubuntu-nginx-circus-postgresql:1.01
 ```
+
+PORT  
+ * 80 : http - [http://localhost](http://localhost)
+ * 443 : https - [https://localhost](https://localhost)
+ * 5432 : PostgreSQL
+ * 15672 : RabbitMQ - [http://localhost:15672/](http://localhost:15672/)
 
 ### 3.3. 動作確認用ファイルの設置
 

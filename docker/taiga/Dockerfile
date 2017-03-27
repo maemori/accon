@@ -1,7 +1,7 @@
 ##
-# TAIGA
+#  TAIGA
 #
-#  用途: Scrum開発管理用サーバー
+#  用途: プロジェクト管理プラットフォーム
 #  構成: image[ubuntu-nginx-python3-ruby-nodejs-redis-postgresql] + TAIGA
 #
 # Part of the ACCON.
@@ -10,7 +10,7 @@
 # This software is released under the MIT License.
 # http://opensource.org/licenses/mit-license.php
 #
-# @version    1.01
+# @version    1.05
 # @author     Maemori Fumihiro
 # @link       https://kurobuta.jp
 FROM accon/ubuntu-nginx-circus-postgresql:1.01
