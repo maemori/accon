@@ -1,0 +1,25 @@
+server {
+
+	server_name _;
+	listen 443;
+
+	root /develop/www;
+
+	ssl on;
+	ssl_certificate /etc/nginx/certs/server.crt;
+	ssl_certificate_key /etc/nginx/certs/server.key;
+
+	access_log /var/log/nginx/localhost-access-ssl.log;
+	error_log /var/log/nginx/localhost-error-ssl.log;
+
+	charset utf-8;
+	send_timeout 180;
+	large_client_header_buffers 4 32k;
+	client_max_body_size 250m;
+
+	location / {
+		index index.html;
+		try_files $uri $uri/ /index.html;
+	}
+
+}
