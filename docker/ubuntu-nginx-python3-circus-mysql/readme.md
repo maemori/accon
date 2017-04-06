@@ -1,5 +1,5 @@
 # Short Description
-All-in-One Web(Python3)開発環境 （Ubuntu + Nginx(ssl) + Python3 + Circus + Django + RabbitMQ + Node + Coffee + Redis + MySQL）
+All-in-One Web(Python3)開発環境 （Ubuntu + Nginx(ssl) + Python3 + Circus + Django + RabbitMQ + Redis + MySQL）
 
 # Full Description
 
@@ -22,8 +22,6 @@ PythonのWebアプリケーションに特化したローカル開発環境。
  * Circus: 0.14.0
  * Django: 1.10.6
  * RabbitMQ: 3.5.7
- * Node: 7.7.4
- * coffee: 1.12.4
  * Redis: 3.2
  * MySQL: 5.7
 
@@ -130,8 +128,8 @@ docker images
 #### X.1.1. ビルド
 
 ```bash:
-cd ~/Develop/master/accon/v2.0/data-volume/workspace/accon/docker/ubuntu-nginx-circus-mysql/
-docker build -t accon/ubuntu-nginx-circus-mysql:1.00 .
+cd ~/Develop/master/accon/v2.0/data-volume/workspace/accon/docker/ubuntu-nginx-python3-circus-mysql/
+docker build -t accon/ubuntu-nginx-python3-circus-mysql:1.00 .
 ```
 
 ----
@@ -140,10 +138,10 @@ docker build -t accon/ubuntu-nginx-circus-mysql:1.00 .
 
 ```bash:
 # push
-docker push accon/ubuntu-nginx-circus-mysql:1.00
+docker push accon/ubuntu-nginx-python3-circus-mysql:1.00
 # Tag
-docker tag accon/ubuntu-nginx-circus-mysql:1.00 accon/ubuntu-nginx-circus-mysql:latest
-docker push accon/ubuntu-nginx-circus-mysql:latest
+docker tag accon/ubuntu-nginx-python3-circus-mysql:1.00 accon/ubuntu-nginx-python3-circus-mysql:latest
+docker push accon/ubuntu-nginx-python3-circus-mysql:latest
 # None images delete
 docker images | awk '/<none/{print $3}' | xargs docker rmi
 docker images
@@ -152,6 +150,6 @@ docker images
 #### X.1.3. コンテナイメージの削除
 
 ```
-docker rmi accon/ubuntu-nginx-circus-mysql:latest
-docker rmi accon/ubuntu-nginx-circus-mysql:1.00
+docker rmi accon/ubuntu-nginx-python3-circus-mysql:latest
+docker rmi accon/ubuntu-nginx-python3-circus-mysql:1.00
 ```

@@ -1,8 +1,8 @@
 ##
-# ubuntu-nginx-python3-mysql
+# ubuntu-nginx-python3-circus-mysql
 #
 #  用途: 開発環境の基礎構成
-#  構成: Ubuntu + Nginx(ssl) + Python3 + Node + Circus + RabbitMQ + MySQL
+#  構成: Ubuntu + Nginx(ssl) + Python3 + Circus + Qt5 + RabbitMQ + MySQL
 #
 # Part of the ACCON.
 #
@@ -52,18 +52,9 @@ RUN \
 RUN \
   apt-get update && apt-get install -y python3 python3-pip python3-dev && \
     pip3 install --upgrade pip && \
-    pip3 install virtualenv virtualenvwrapper circus
-
-## Nodejs & coffee-script
-RUN \
-  apt-get update && apt-get install -y nodejs npm && \
-    npm cache clean && \
-    npm install n -g && \
-    n stable && \
-    n 7 && \
-    ln -s /usr/bin/nodejs /usr/bin/node && \
-    npm install -g gulp && \
-    npm install -g coffee-script
+    pip3 install virtualenv virtualenvwrapper circus numpy && \
+    ln -s /usr/bin/python3 /usr/bin/python && \
+    ln -s /usr/bin/pip3 /usr/bin/pip
 
 # Language settings
 RUN \

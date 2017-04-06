@@ -50,7 +50,7 @@ install() {
   su - taiga -c /etc/service/taiga_setting
 }
 
-# TAIGA installi
+# TAIGA install
 install
 
 # TAIGA start
