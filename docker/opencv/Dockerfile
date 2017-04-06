@@ -43,14 +43,12 @@ RUN \
    -DCMAKE_VERBOSE_MAKEFILE=ON \
    -Wno-dev \
    -DBUILD_JASPER=OFF \
-   -DBUILD_JPEG=OFF \
-   -DBUILD_TIFF=OFF \
+   -DBUILD_JPEG=ON \
+   -DBUILD_TIFF=ON \
    -DBUILD_OPENEXR=OFF \
-   -DBUILD_PNG=OFF \
+   -DBUILD_PNG=ON \
    -DBUILD_ZLIB=OFF \
    -DBUILD_opencv_java=OFF \
-   -DBUILD_opencv_python2=ON \
-   -DBUILD_opencv_python3=ON \
    -DBUILD_TESTS=OFF \
    -DBUILD_PERF_TESTS=OFF \
    -DWITH_1394=OFF \
