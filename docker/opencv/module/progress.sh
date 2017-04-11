@@ -1,5 +1,4 @@
-#!/usr/bin/env bash
-
+#!/bin/bash
 workspace_dir=/develop/workspace
 
 progress_del() {

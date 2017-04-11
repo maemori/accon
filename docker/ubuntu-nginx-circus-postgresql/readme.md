@@ -3,7 +3,7 @@ All-in-One Web(Python3)開発環境 （Ubuntu + Nginx(ssl) + Python3 + Circus + 
 
 # Full Description
 
-## ● [Dockerfileは、こちら(GitHub)](https://github.com/maemori/accon/blob/master/docker/ubuntu-nginx-circus-postgresql/Dockerfile)
+## ● [Dockerfileは、こちら(GitHub)](https://github.com/maemori/accon/blob/master/docker/ubuntu-nginx-python3-jupyter-django-mysql/Dockerfile)
 
 ## ● [Dockerfile一式は、こちらからダウンロード](https://kurobuta.jp/download/get/18)
 
@@ -33,21 +33,21 @@ PythonのWebアプリケーションに特化したローカル開発環境。
 
 ```bash:
 mkdir ~/productment
-mkdir -p ~/productment/ubuntu-nginx-circus-postgresql/workspace
-mkdir ~/productment/ubuntu-nginx-circus-postgresql/www
+mkdir -p ~/productment/ubuntu-nginx-python3-jupyter-django-mysql/workspace
+mkdir ~/productment/ubuntu-nginx-python3-jupyter-django-mysql/www
 ```
 
 ### 3.2. Dockerコンテナの取得と起動
 
 ```bash:
 docker run -d \
-  -v ~/productment/ubuntu-nginx-circus-postgresql/workspace:/develop/workspace:rw \
-  -v ~/productment/ubuntu-nginx-circus-postgresql/www:/develop/www:rw \
+  -v ~/productment/ubuntu-nginx-python3-jupyter-django-mysql/workspace:/develop/workspace:rw \
+  -v ~/productment/ubuntu-nginx-python3-jupyter-django-mysql/www:/develop/www:rw \
   -p 80:80 -p 443:443 -p 5432:5432 -p 15672:15672 \
   -t -i \
   -h develop-server-01 \
   --name develop-server-01 \
-  accon/ubuntu-nginx-circus-postgresql:1.01
+  accon/ubuntu-nginx-python3-jupyter-django-mysql:1.01
 ```
 
 PORT  
@@ -130,8 +130,8 @@ docker images
 #### X.1.1. ビルド
 
 ```bash:
-cd ~/Develop/master/accon/v2.0/data-volume/workspace/accon/docker/ubuntu-nginx-circus-postgresql/
-docker build -t accon/ubuntu-nginx-circus-postgresql:1.01 .
+cd ~/Develop/master/accon/v2.0/data-volume/workspace/accon/docker/ubuntu-nginx-python3-jupyter-django-mysql/
+docker build -t accon/ubuntu-nginx-python3-jupyter-django-mysql:1.01 .
 ```
 
 ----
@@ -140,10 +140,10 @@ docker build -t accon/ubuntu-nginx-circus-postgresql:1.01 .
 
 ```bash:
 # push
-docker push accon/ubuntu-nginx-circus-postgresql:1.01
+docker push accon/ubuntu-nginx-python3-jupyter-django-mysql:1.01
 # Tag
-docker tag accon/ubuntu-nginx-circus-postgresql:1.01 accon/ubuntu-nginx-circus-postgresql:latest
-docker push accon/ubuntu-nginx-circus-postgresql:latest
+docker tag accon/ubuntu-nginx-python3-jupyter-django-mysql:1.01 accon/ubuntu-nginx-python3-jupyter-django-mysql:latest
+docker push accon/ubuntu-nginx-python3-jupyter-django-mysql:latest
 # None images delete
 docker images | awk '/<none/{print $3}' | xargs docker rmi
 docker images
@@ -152,6 +152,6 @@ docker images
 #### X.1.3. コンテナイメージの削除
 
 ```
-docker rmi accon/ubuntu-nginx-circus-postgresql:latest
-docker rmi accon/ubuntu-nginx-circus-postgresql:1.00
+docker rmi accon/ubuntu-nginx-python3-jupyter-django-mysql:latest
+docker rmi accon/ubuntu-nginx-python3-jupyter-django-mysql:1.00
 ```
