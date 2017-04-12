@@ -42,6 +42,9 @@ RUN chmod +x /etc/service/progress
 ADD ./module/run.sh /etc/service/run
 RUN chmod +x /etc/service/run
 
+# Sample
+COPY ./sample /develop/sample
+
 # Public port
 EXPOSE 80 443 3306 15672
 

@@ -11,6 +11,16 @@ rabbitmqctl add_user develop PASSWORD
 rabbitmqctl add_vhost develop
 rabbitmqctl set_permissions -p develop develop ".*" ".*" ".*"
 
+# install
+install() {
+  if [ ! -e /develop/workspace/sample ]; then
+    cp -ra /develop/sample /develop/workspace/sample
+  fi
+}
+
+# install
+install
+
 jupyter notebook --allow-root
 
 /etc/service/progress end

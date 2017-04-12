@@ -59,8 +59,6 @@ docker run -d \
   -p 80:80 -p 443:443 -p 3306:3306 -p 15672:15672 \
   -t -i \
   --privileged \
-  -e DISPLAY=$DISPLAY \
-  -v /tmp/.X11-unix:/tmp/.X11-unix \
   -h opencv \
   --name opencv \
   accon/opencv:1.00
